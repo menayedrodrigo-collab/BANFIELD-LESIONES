@@ -109,6 +109,45 @@ select:focus{border-color:var(--g2)}
   .pnota{font-size:12.5px;padding:9px 11px}
   .inj-info{font-size:11.5px}
 }
+
+/* === MC WEEKLY GRID (read-only for profes) === */
+.pc{grid-column:span 2}
+@media (min-width:1400px){.pc{grid-column:span 1}}
+.pg{grid-template-columns:1fr}
+@media (min-width:1100px){.pg{grid-template-columns:1fr 1fr}}
+.pmcg{margin-top:10px}
+.pmcg-hdr{display:flex;align-items:center;gap:8px;margin-bottom:7px;font-size:10px;color:var(--txt2);flex-wrap:wrap}
+.pmcg-mc{font-family:Oswald,sans-serif;font-weight:700;font-size:11px;letter-spacing:.6px;color:#E0EEE0;background:var(--bg3);padding:2px 8px;border-radius:3px}
+.pmcg-dates{font-size:9.5px;color:var(--txt3)}
+.pmcg-rpe,.pmcg-eva{font-family:Oswald,sans-serif;font-size:10px;background:var(--bg3);padding:2px 7px;border-radius:3px;color:var(--txt2)}
+.pmcg-rpe strong,.pmcg-eva strong{color:var(--gold2);font-size:11px}
+.pmcg-grid{display:grid;grid-template-columns:90px repeat(7,1fr);gap:2px;width:100%;overflow-x:auto}
+.pmcg-th{padding:3px 2px;text-align:center;font-family:Oswald,sans-serif;font-size:8.5px;letter-spacing:.8px;color:var(--txt3);background:var(--bg3);border-radius:2px;font-weight:500;text-transform:uppercase}
+.pmcg-th.dom{text-align:left;padding-left:6px;font-size:9px;color:var(--txt2);font-weight:600}
+.pmcg-th.today{background:rgba(62,160,62,.12);color:var(--g3)}
+.pmcg-th.we{opacity:.4}
+.pmcg-domcell{background:var(--bg3);padding:4px 6px;border-radius:2px;font-family:Inter,sans-serif;font-weight:500;font-size:9.5px;color:var(--txt);display:flex;align-items:center;gap:4px;height:38px}
+.pmcg-domico{font-size:12px;line-height:1;flex-shrink:0}
+.pmcg-cell{background:var(--bg3);border:1px solid var(--brd);border-radius:2px;height:38px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:1px;overflow:hidden}
+.pmcg-cell.ok{border-color:rgba(62,160,62,.4);background:rgba(62,160,62,.08)}
+.pmcg-cell.care{border-color:rgba(138,112,64,.4);background:rgba(138,112,64,.08)}
+.pmcg-cell.no{border-color:rgba(184,48,48,.15);background:rgba(184,48,48,.02)}
+.pmcg-cell.today{box-shadow:inset 0 0 0 1px rgba(62,160,62,.3)}
+.pmcg-cs{font-family:Oswald,sans-serif;font-size:13px;font-weight:700;line-height:1}
+.pmcg-cell.ok .pmcg-cs{color:var(--g3)}
+.pmcg-cell.care .pmcg-cs{color:var(--gold2)}
+.pmcg-cell.no .pmcg-cs{color:rgba(184,48,48,.5)}
+.pmcg-cdet{font-size:7.5px;color:var(--txt2);margin-top:1px;line-height:1.1;text-align:center;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:Inter,sans-serif;padding:0 1px}
+.pmcg-cell.ok .pmcg-cdet,.pmcg-cell.care .pmcg-cdet{color:var(--gold2)}
+
+@media (max-width:700px){
+  .pmcg-grid{grid-template-columns:70px repeat(7,1fr)}
+  .pmcg-domcell{padding:3px 5px;font-size:8.5px;height:36px;gap:3px}
+  .pmcg-cell{height:36px}
+  .pmcg-cs{font-size:11px}
+  .pmcg-cdet{font-size:7px}
+}
+
 </style>
 </head>
 <body>
@@ -211,6 +250,7 @@ async function loadFromSupabase(){
         rehabMap[r.jugador_key]={fase:r.fase||0,acts:r.acts||{},nota:r.nota||''};
       });
     }
+    await mcgLoadFromSupabase();
     var resC=await sb.from('config').select('*').eq('key','season_start').single();
     if(resC.data&&resC.data.value)seasonStart=resC.data.value;
     var now=new Date();
@@ -220,6 +260,107 @@ async function loadFromSupabase(){
     qs('upd').textContent='Error al cargar';
   }
 }
+
+
+// ═══ MC WEEKLY GRID (READ-ONLY) ═══════════════════════════
+var MCG_DOMAINS = [
+  {id:'gim', lbl:'Gimnasio', ico:'\u{1F3CB}'},
+  {id:'aer', lbl:'Aerobico', ico:'\u{1F3C3}'},
+  {id:'int', lbl:'Intermitente', ico:'\u2195'},
+  {id:'spr', lbl:'Sprint', ico:'\u{1F4A8}'},
+  {id:'cod', lbl:'C. direccion', ico:'\u{1F500}'},
+  {id:'tec', lbl:'Tecnica balon', ico:'\u26BD'},
+  {id:'tac', lbl:'Tactico', ico:'\u{1F4CB}'},
+  {id:'pli', lbl:'Pliometria', ico:'\u{1F3C0}'},
+  {id:'con', lbl:'Contacto', ico:'\u{1F44A}'}
+];
+var MCG_DAYS = ['LUN','MAR','MIE','JUE','VIE','SAB','DOM'];
+var mcgCache = {};  // {jugadorKey: {mcNum: gridObj}}
+
+async function mcgLoadFromSupabase(){
+  try{
+    var res = await sb.from('microciclos_rehab').select('*');
+    if(res.data){
+      mcgCache = {};
+      res.data.forEach(function(r){
+        if(!mcgCache[r.jugador_key]) mcgCache[r.jugador_key] = {};
+        mcgCache[r.jugador_key][r.mc_numero] = {
+          rpe_obj: r.rpe_objetivo,
+          eva_obj: r.eva_max_objetivo,
+          days: (r.grid && r.grid.days) ? r.grid.days : null
+        };
+      });
+    }
+  }catch(e){
+    console.error('mcg load error', e);
+  }
+}
+
+function mcgRenderReadOnly(jKey, container){
+  var mcNum = getCurrentMC();
+  var grid = mcgCache[jKey] && mcgCache[jKey][mcNum];
+  if(!grid || !grid.days){
+    container.innerHTML = '<div style="text-align:center;padding:14px;color:var(--txt3);font-size:11px;background:var(--bg3);border-radius:5px">Sin planificacion cargada para MC '+mcNum+'</div>';
+    return;
+  }
+
+  var rng = getMCRange(mcNum);
+  var todayIdx = (new Date().getDay()+6)%7;
+
+  // Calc RPE/EVA promedios reales
+  var rpeVals=[], evaVals=[];
+  grid.days.forEach(function(day){
+    Object.keys(day).forEach(function(domId){
+      var c = day[domId];
+      if(c && c.st>0){
+        if(c.rpe!==undefined && c.rpe!==null && c.rpe!=='') rpeVals.push(parseFloat(c.rpe));
+        if(c.eva!==undefined && c.eva!==null && c.eva!=='') evaVals.push(parseFloat(c.eva));
+      }
+    });
+  });
+  var rpeAvg = rpeVals.length ? (rpeVals.reduce(function(a,b){return a+b;},0)/rpeVals.length).toFixed(1) : null;
+  var evaAvg = evaVals.length ? (evaVals.reduce(function(a,b){return a+b;},0)/evaVals.length).toFixed(1) : null;
+
+  // Header
+  var fmtD = function(s){if(!s)return'';return new Date(s+'T12:00:00').toLocaleDateString('es-AR',{day:'2-digit',month:'short'});};
+  var hdrHtml = '<div class="pmcg-hdr">'
+    + '<span class="pmcg-mc">MC '+mcNum+'</span>'
+    + '<span class="pmcg-dates">'+fmtD(rng.start)+' - '+fmtD(rng.end)+'</span>';
+  if(grid.rpe_obj){
+    hdrHtml += '<span class="pmcg-rpe">RPE obj <strong>'+grid.rpe_obj+'</strong>'+(rpeAvg?' · real '+rpeAvg:'')+'</span>';
+  }
+  if(grid.eva_obj){
+    hdrHtml += '<span class="pmcg-eva">EVA max <strong>'+grid.eva_obj+'</strong>'+(evaAvg?' · prom '+evaAvg:'')+'</span>';
+  }
+  hdrHtml += '</div>';
+
+  // Grid
+  var gridHtml = '<div class="pmcg-grid">';
+  gridHtml += '<div class="pmcg-th dom">Dominio</div>';
+  MCG_DAYS.forEach(function(d,i){
+    var cls = 'pmcg-th';
+    if(i===todayIdx) cls += ' today';
+    if(i>=5) cls += ' we';
+    gridHtml += '<div class="'+cls+'">'+d+'</div>';
+  });
+
+  MCG_DOMAINS.forEach(function(dom){
+    gridHtml += '<div class="pmcg-domcell"><span class="pmcg-domico">'+dom.ico+'</span><span>'+dom.lbl+'</span></div>';
+    for(var di=0; di<7; di++){
+      var cellData = grid.days[di] && grid.days[di][dom.id] || {st:0};
+      var stIco = ['\u2715','!','\u2713'][cellData.st];
+      var stCls = ['no','care','ok'][cellData.st];
+      var isToday = di===todayIdx;
+      var html = '<div class="pmcg-cs">'+stIco+'</div>';
+      if(cellData.det) html += '<div class="pmcg-cdet">'+cellData.det+'</div>';
+      gridHtml += '<div class="pmcg-cell '+stCls+(isToday?' today':'')+'">'+html+'</div>';
+    }
+  });
+  gridHtml += '</div>';
+
+  container.innerHTML = hdrHtml + gridHtml;
+}
+
 
 function render(){
   var catF=qs('pf-cat').value;
@@ -289,17 +430,10 @@ function render(){
     fr.innerHTML='<span class="fase-lbl">Etapa:</span><span class="fb '+FC[fase]+'">'+FN[fase]+'</span>';
     body.appendChild(fr);
 
-    var pills=document.createElement('div');pills.className='pills';
-    ACTS.forEach(function(a){
-      var st=rh&&rh.acts&&rh.acts[a.id]?rh.acts[a.id].st:0;
-      var cls=['no','care','ok'][st];
-      var slbl=['No puede','Con cuidado','Puede'][st];
-      var pill=document.createElement('div');pill.className='pill '+cls;
-      pill.innerHTML='<span class="pill-ico">'+(AICO[a.id]||a.id)+'</span>'
-        +'<div><div class="pill-lbl '+cls+'">'+a.lbl+'</div><div class="pill-st">'+slbl+'</div></div>';
-      pills.appendChild(pill);
-    });
-    body.appendChild(pills);
+    var pmcgWrap=document.createElement('div');
+    pmcgWrap.className='pmcg';
+    body.appendChild(pmcgWrap);
+    mcgRenderReadOnly(k, pmcgWrap);
 
     if(rh&&rh.nota){
       var nota=document.createElement('div');nota.className='pnota';
