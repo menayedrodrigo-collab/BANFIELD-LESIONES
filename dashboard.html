@@ -222,6 +222,102 @@ tbody td{padding:8px 12px;vertical-align:middle}
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--brd2);border-radius:3px}
+
+/* === MC WEEKLY GRID === */
+.mcg-wrap{margin-top:12px;padding-top:12px;border-top:1px solid var(--brd)}
+.mcg-header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.mcg-nav{display:flex;align-items:center;background:var(--bg3);border:1px solid var(--brd2);border-radius:5px;overflow:hidden}
+.mcg-nb{background:transparent;border:none;color:var(--txt2);padding:4px 10px;font-size:13px;cursor:pointer;transition:all .15s}
+.mcg-nb:hover:not(:disabled){background:var(--brd2);color:var(--txt)}
+.mcg-nb:disabled{opacity:.3;cursor:default}
+.mcg-info{padding:4px 12px;border-left:1px solid var(--brd2);border-right:1px solid var(--brd2);text-align:center;min-width:130px}
+.mcg-num{font-family:Oswald,sans-serif;font-weight:700;font-size:12px;color:#E0EEE0;letter-spacing:.8px}
+.mcg-dates{font-size:9.5px;color:var(--txt2);margin-top:1px}
+.mcg-tpl-btn{background:rgba(62,160,62,.08);border:1px solid rgba(62,160,62,.2);color:var(--g3);padding:4px 10px;border-radius:14px;font-size:10.5px;cursor:pointer;font-weight:500;transition:all .15s;font-family:Inter,sans-serif}
+.mcg-tpl-btn:hover{background:rgba(62,160,62,.15)}
+.mcg-obj{display:flex;gap:10px;align-items:center;background:var(--bg3);border:1px solid var(--brd);border-radius:5px;padding:6px 10px;margin-bottom:8px;flex-wrap:wrap}
+.mcg-obj-item{display:flex;align-items:center;gap:5px}
+.mcg-obj-lbl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;color:var(--txt2)}
+.mcg-obj-input{background:var(--bg4);border:1px solid var(--brd2);color:var(--txt);padding:3px 6px;border-radius:3px;font-family:Oswald,sans-serif;font-size:12px;font-weight:600;width:42px;text-align:center;outline:none}
+.mcg-obj-input:focus{border-color:var(--g2)}
+.mcg-obj-real{font-family:Oswald,sans-serif;font-size:11px;color:var(--txt3)}
+.mcg-obj-real strong{color:var(--g3);font-size:12px}
+.mcg-status{font-size:9px;padding:1px 6px;border-radius:3px;font-weight:600;letter-spacing:.3px;text-transform:uppercase}
+.mcg-status.ok{background:rgba(62,160,62,.12);color:var(--g3);border:1px solid rgba(62,160,62,.25)}
+.mcg-status.warn{background:rgba(138,112,64,.12);color:var(--gold2);border:1px solid rgba(138,112,64,.25)}
+.mcg-status.bad{background:rgba(184,48,48,.12);color:var(--red);border:1px solid rgba(184,48,48,.25)}
+
+.mcg-grid{display:grid;grid-template-columns:115px repeat(7,1fr);gap:3px;width:100%;overflow-x:auto}
+.mcg-th{padding:5px 4px;text-align:center;font-family:Oswald,sans-serif;font-size:9px;letter-spacing:1px;color:var(--txt2);background:var(--bg3);border-radius:3px;font-weight:500;text-transform:uppercase}
+.mcg-th.dom{text-align:left;padding-left:8px;font-size:10px;color:var(--txt);font-weight:600;letter-spacing:.5px}
+.mcg-th.today{background:rgba(62,160,62,.1);color:var(--g3)}
+.mcg-th.we{opacity:.4}
+.mcg-domcell{background:var(--bg3);padding:6px 8px;border-radius:3px;font-family:Inter,sans-serif;font-weight:500;font-size:10.5px;color:var(--txt);display:flex;align-items:center;gap:5px;height:42px}
+.mcg-domico{font-size:13px;line-height:1;flex-shrink:0}
+.mcg-cell{background:var(--bg3);border:1px solid var(--brd);border-radius:3px;height:42px;cursor:pointer;transition:all .12s;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:2px;user-select:none;overflow:hidden}
+.mcg-cell:hover{border-color:var(--brd2)}
+.mcg-cell.ok{border-color:rgba(62,160,62,.35);background:rgba(62,160,62,.06)}
+.mcg-cell.care{border-color:rgba(138,112,64,.35);background:rgba(138,112,64,.06)}
+.mcg-cell.no{border-color:rgba(184,48,48,.18);background:rgba(184,48,48,.03)}
+.mcg-cs{font-family:Oswald,sans-serif;font-size:12px;font-weight:700;line-height:1}
+.mcg-cell.ok .mcg-cs{color:var(--g3)}
+.mcg-cell.care .mcg-cs{color:var(--gold2)}
+.mcg-cell.no .mcg-cs{color:rgba(184,48,48,.55)}
+.mcg-cdet{font-size:8px;color:var(--txt2);margin-top:1px;line-height:1.1;text-align:center;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:Inter,sans-serif;padding:0 2px}
+.mcg-cell.ok .mcg-cdet,.mcg-cell.care .mcg-cdet{color:var(--gold2)}
+.mcg-crpe{position:absolute;top:1px;left:2px;font-size:7px;color:var(--txt3);font-family:Oswald,sans-serif;font-weight:600;letter-spacing:.2px}
+.mcg-ceva{position:absolute;top:1px;right:2px;font-size:7px;color:var(--txt3);font-family:Oswald,sans-serif;font-weight:600;letter-spacing:.2px}
+.mcg-cell.no .mcg-crpe,.mcg-cell.no .mcg-ceva{display:none}
+
+/* MODAL DE CELDA */
+.mcm-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:400;align-items:center;justify-content:center;padding:20px}
+.mcm-bg.on{display:flex}
+.mcm{background:var(--bg2);border:1px solid var(--brd2);border-radius:9px;padding:18px 20px;width:420px;max-width:94vw;max-height:90vh;overflow-y:auto}
+.mcm-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--brd)}
+.mcm-title{font-family:Oswald,sans-serif;font-weight:700;font-size:13px;letter-spacing:1.8px;text-transform:uppercase;color:#E0EEE0}
+.mcm-sub{font-size:10.5px;color:var(--txt2);margin-top:2px}
+.mcm-close{background:transparent;border:none;color:var(--txt2);font-size:18px;cursor:pointer;padding:0 6px;line-height:1}
+.mcm-close:hover{color:var(--txt)}
+.mcm-section{margin-bottom:11px}
+.mcm-lbl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--txt2);margin-bottom:5px}
+.mcm-input{width:100%;background:var(--bg3);border:1px solid var(--brd2);color:var(--txt);padding:6px 9px;border-radius:4px;font-family:Inter,sans-serif;font-size:11.5px;outline:none}
+.mcm-input:focus{border-color:var(--g2)}
+.mcm-select{width:100%;background:var(--bg3);border:1px solid var(--brd2);color:var(--txt);padding:6px 9px;border-radius:4px;font-family:Inter,sans-serif;font-size:11.5px;outline:none;cursor:pointer}
+.mcm-slrow{display:flex;align-items:center;gap:8px}
+.mcm-sl{flex:1;-webkit-appearance:none;appearance:none;height:4px;background:var(--bg3);border-radius:2px;outline:none}
+.mcm-sl::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:var(--g2);cursor:pointer}
+.mcm-sl::-webkit-slider-thumb:hover{background:var(--g3)}
+.mcm-slv{font-family:Oswald,sans-serif;font-size:13px;font-weight:600;color:var(--g3);min-width:38px;text-align:right}
+.mcm-chips{display:flex;gap:4px;flex-wrap:wrap}
+.mcm-chip{background:var(--bg3);border:1px solid var(--brd2);color:var(--txt2);padding:4px 9px;border-radius:12px;font-size:10px;cursor:pointer;transition:all .15s;user-select:none}
+.mcm-chip:hover{color:var(--txt)}
+.mcm-chip.on{background:rgba(62,160,62,.12);border-color:var(--g2);color:var(--g3)}
+.mcm-dual{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:9px;background:var(--bg3);border-radius:5px;border:1px solid var(--brd);margin-top:4px}
+.mcm-ds{}
+.mcm-dslbl{font-size:9px;color:var(--txt2);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center}
+.mcm-dslbl span{font-family:Oswald,sans-serif;font-size:13px;color:#E0EEE0;font-weight:700}
+.mcm-cycle{display:flex;gap:4px;background:var(--bg3);padding:3px;border-radius:5px;border:1px solid var(--brd2)}
+.mcm-co{flex:1;padding:5px 8px;border-radius:3px;text-align:center;cursor:pointer;font-size:10px;font-weight:600;transition:all .15s;font-family:Oswald,sans-serif;letter-spacing:.4px}
+.mcm-co.on.no{background:rgba(184,48,48,.15);color:var(--red);border:1px solid rgba(184,48,48,.3)}
+.mcm-co.on.care{background:rgba(138,112,64,.15);color:var(--gold2);border:1px solid rgba(138,112,64,.3)}
+.mcm-co.on.ok{background:rgba(62,160,62,.15);color:var(--g3);border:1px solid rgba(62,160,62,.3)}
+.mcm-co:not(.on){color:var(--txt3)}
+.mcm-co:not(.on):hover{color:var(--txt2)}
+.mcm-acts{display:flex;gap:6px;justify-content:flex-end;margin-top:13px;padding-top:11px;border-top:1px solid var(--brd)}
+.mcm-can{background:transparent;border:1px solid var(--brd2);color:var(--txt2);padding:6px 12px;border-radius:4px;font-size:11px;cursor:pointer;font-family:Inter,sans-serif}
+.mcm-can:hover{border-color:var(--txt2);color:var(--txt)}
+.mcm-save{background:var(--g1);border:none;color:#E0EEE0;padding:6px 16px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif}
+.mcm-save:hover{background:var(--g2)}
+
+@media (max-width:700px){
+  .mcg-grid{grid-template-columns:90px repeat(7,1fr);font-size:9px}
+  .mcg-domcell{padding:5px;font-size:9.5px;gap:4px;height:40px}
+  .mcg-cell{height:40px}
+  .mcg-cs{font-size:11px}
+  .mcg-cdet{font-size:7.5px}
+  .mcm{padding:14px 16px}
+}
+
 </style>
 </head>
 <body>
@@ -831,6 +927,573 @@ function renderTable(){
   }).join('');
 }
 
+
+// ═══ MC WEEKLY GRID MODULE ═══════════════════════════════
+var MCG_DOMAINS = [
+  {id:'gim', lbl:'Gimnasio', ico:'\u{1F3CB}'},
+  {id:'aer', lbl:'Aerobico continuo', ico:'\u{1F3C3}'},
+  {id:'int', lbl:'Intermitente', ico:'\u2195'},
+  {id:'spr', lbl:'Sprint', ico:'\u{1F4A8}'},
+  {id:'cod', lbl:'Cambios de direccion', ico:'\u{1F500}'},
+  {id:'tec', lbl:'Tecnica con balon', ico:'\u26BD'},
+  {id:'tac', lbl:'Trabajo tactico', ico:'\u{1F4CB}'},
+  {id:'pli', lbl:'Pliometria/saltos', ico:'\u{1F3C0}'},
+  {id:'con', lbl:'Contacto', ico:'\u{1F44A}'}
+];
+
+// Plantillas por fase (st: 0=no, 1=care, 2=ok). Cada plantilla define los 9 dominios.
+// La grilla diaria se autocompleta replicando el patron L-V.
+var MCG_TEMPLATES = {
+  0:{gim:0,aer:0,int:0,spr:0,cod:0,tec:0,tac:0,pli:0,con:0},
+  1:{gim:2,aer:1,int:0,spr:0,cod:0,tec:0,tac:0,pli:0,con:0},
+  2:{gim:2,aer:2,int:0,spr:0,cod:0,tec:1,tac:0,pli:0,con:0},
+  3:{gim:2,aer:2,int:1,spr:0,cod:1,tec:2,tac:1,pli:1,con:0},
+  4:{gim:2,aer:2,int:2,spr:1,cod:1,tec:2,tac:1,pli:2,con:0},
+  5:{gim:2,aer:2,int:2,spr:2,cod:2,tec:2,tac:2,pli:2,con:1},
+  6:{gim:2,aer:2,int:2,spr:2,cod:2,tec:2,tac:2,pli:2,con:2}
+};
+
+// Detalles tipicos por fase (se usan al aplicar plantilla)
+var MCG_TPL_DETAILS = {
+  0:{},
+  1:{gim:'Tren sup + core',aer:'15-20min Z1-Z2 bici'},
+  2:{gim:'Tren sup + core',aer:'25-30min Z2',tec:'Individual 15min'},
+  3:{gim:'Carga moderada',aer:'30min Z2',int:'Subm 70% Vmax',cod:'<45°',tec:'Grupal 20min',tac:'Reducido sin contacto',pli:'Unilateral baja'},
+  4:{gim:'70-80%',aer:'25-30min Z2',int:'HIIT 16min 75%',spr:'70-80% Vmax',cod:'<45° 75%',tec:'Grupal',tac:'4v4 sin contacto',pli:'Bilateral progresiva'},
+  5:{gim:'80%+',aer:'20min Z2-Z3',int:'HIIT/RSA 80%',spr:'90-100% Vmax',cod:'Reactivos',tec:'Grupal',tac:'Posicional',pli:'Completa',con:'Controlado'},
+  6:{gim:'Libre',aer:'Libre',int:'Libre',spr:'Libre',cod:'Libre',tec:'Libre',tac:'Con grupo',pli:'Libre',con:'Libre'}
+};
+
+// Etiquetas de dias
+var MCG_DAYS = ['LUN','MAR','MIE','JUE','VIE','SAB','DOM'];
+var MCG_DAYS_FULL = ['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'];
+
+// Estado del grid module: en memoria mientras editas
+// Estructura: { jugadorKey: { mcNum: gridObj, ... } }
+// gridObj: { rpe_obj, eva_obj, days: [{ dom_id: {st, det, rpe, eva, ...campos} }] }
+var mcgCache = {};
+var mcgViewing = {}; // { jugadorKey: mcNum }
+
+// Modal state
+var mcgModalCtx = null; // { jugadorKey, mcNum, domId, dayIdx, data }
+
+function mcgEmptyGrid(){
+  var days = [];
+  for(var i=0;i<7;i++){
+    var dayData = {};
+    MCG_DOMAINS.forEach(function(d){
+      dayData[d.id] = {st:0};
+    });
+    days.push(dayData);
+  }
+  return {rpe_obj:null, eva_obj:null, days:days};
+}
+
+function mcgGetGrid(jKey, mcNum){
+  if(!mcgCache[jKey]) mcgCache[jKey] = {};
+  if(!mcgCache[jKey][mcNum]) mcgCache[jKey][mcNum] = mcgEmptyGrid();
+  return mcgCache[jKey][mcNum];
+}
+
+function mcgApplyTemplate(jKey, mcNum, fase){
+  var grid = mcgGetGrid(jKey, mcNum);
+  var tpl = MCG_TEMPLATES[fase] || MCG_TEMPLATES[0];
+  var details = MCG_TPL_DETAILS[fase] || {};
+  for(var d=0; d<7; d++){
+    var isWE = d>=5;
+    MCG_DOMAINS.forEach(function(dom){
+      var st = isWE ? 0 : (tpl[dom.id]||0);
+      grid.days[d][dom.id] = {st:st};
+      if(st>0 && details[dom.id]){
+        grid.days[d][dom.id].det = details[dom.id];
+      }
+    });
+  }
+  return grid;
+}
+
+function mcgCurrentMC(){
+  return (typeof getCurrentMC==='function')?getCurrentMC():1;
+}
+
+function mcgMCRange(mc){
+  return (typeof getMCRange==='function')?getMCRange(mc):{start:'',end:''};
+}
+
+function mcgFormatShort(dateStr){
+  if(!dateStr) return '';
+  var d = new Date(dateStr+'T12:00:00');
+  return d.toLocaleDateString('es-AR',{day:'2-digit',month:'short'});
+}
+
+function mcgRenderGrid(jKey, container){
+  var mcNum = mcgViewing[jKey] || mcgCurrentMC();
+  mcgViewing[jKey] = mcNum;
+  var grid = mcgGetGrid(jKey, mcNum);
+  var rng = mcgMCRange(mcNum);
+  var curMC = mcgCurrentMC();
+  var isNow = mcNum === curMC;
+  var todayIdx = isNow ? (new Date().getDay()+6)%7 : -1; // lun=0..dom=6
+
+  // calc real RPE / EVA promedios
+  var rpeVals=[], evaVals=[];
+  for(var d=0;d<7;d++){
+    MCG_DOMAINS.forEach(function(dom){
+      var c = grid.days[d][dom.id];
+      if(c && c.st>0){
+        if(c.rpe!==undefined && c.rpe!==null && c.rpe!=='') rpeVals.push(parseFloat(c.rpe));
+        if(c.eva!==undefined && c.eva!==null && c.eva!=='') evaVals.push(parseFloat(c.eva));
+      }
+    });
+  }
+  var rpeAvg = rpeVals.length ? (rpeVals.reduce(function(a,b){return a+b;},0)/rpeVals.length).toFixed(1) : '-';
+  var evaAvg = evaVals.length ? (evaVals.reduce(function(a,b){return a+b;},0)/evaVals.length).toFixed(1) : '-';
+  var evaMax = evaVals.length ? Math.max.apply(null, evaVals) : 0;
+
+  var rpeStatus = 'ok', evaStatus = 'ok';
+  if(grid.rpe_obj && rpeVals.length){
+    var diff = Math.abs(parseFloat(rpeAvg) - parseFloat(grid.rpe_obj));
+    if(diff>=2) rpeStatus = 'warn';
+  }
+  if(grid.eva_obj && evaVals.length){
+    if(evaMax > parseFloat(grid.eva_obj)) evaStatus = 'bad';
+  }
+
+  container.innerHTML = ''
+    + '<div class="mcg-header">'
+    +   '<div class="mcg-nav">'
+    +     '<button class="mcg-nb" data-act="prev"'+(mcNum<=1?' disabled':'')+'>&#8249;</button>'
+    +     '<div class="mcg-info">'
+    +       '<div class="mcg-num">MC '+mcNum+(isNow?' · actual':'')+'</div>'
+    +       '<div class="mcg-dates">'+mcgFormatShort(rng.start)+' - '+mcgFormatShort(rng.end)+'</div>'
+    +     '</div>'
+    +     '<button class="mcg-nb" data-act="next">&#8250;</button>'
+    +   '</div>'
+    +   '<button class="mcg-tpl-btn" data-act="tpl">&#8635; Aplicar plantilla de la fase actual</button>'
+    + '</div>'
+    + '<div class="mcg-obj">'
+    +   '<div class="mcg-obj-item">'
+    +     '<span class="mcg-obj-lbl">RPE obj</span>'
+    +     '<input class="mcg-obj-input" type="number" min="0" max="10" data-field="rpe_obj" value="'+(grid.rpe_obj||'')+'" placeholder="-">'
+    +     '<span class="mcg-obj-real">real <strong>'+rpeAvg+'</strong></span>'
+    +     (grid.rpe_obj && rpeVals.length ? '<span class="mcg-status '+rpeStatus+'">'+(rpeStatus==='ok'?'En target':'Fuera')+'</span>' : '')
+    +   '</div>'
+    +   '<div class="mcg-obj-item">'
+    +     '<span class="mcg-obj-lbl">EVA max</span>'
+    +     '<input class="mcg-obj-input" type="number" min="0" max="10" data-field="eva_obj" value="'+(grid.eva_obj||'')+'" placeholder="-">'
+    +     '<span class="mcg-obj-real">pico <strong>'+evaMax+'</strong></span>'
+    +     (grid.eva_obj && evaVals.length ? '<span class="mcg-status '+evaStatus+'">'+(evaStatus==='ok'?'Bajo umbral':'Alerta')+'</span>' : '')
+    +   '</div>'
+    + '</div>';
+
+  // Build grid
+  var gridDiv = document.createElement('div');
+  gridDiv.className = 'mcg-grid';
+
+  // Header row
+  var hLbl = document.createElement('div');
+  hLbl.className = 'mcg-th dom';
+  hLbl.textContent = 'Dominio';
+  gridDiv.appendChild(hLbl);
+  MCG_DAYS.forEach(function(d,i){
+    var h = document.createElement('div');
+    h.className = 'mcg-th';
+    if(i===todayIdx) h.className += ' today';
+    if(i>=5) h.className += ' we';
+    h.textContent = d;
+    gridDiv.appendChild(h);
+  });
+
+  // Domain rows
+  MCG_DOMAINS.forEach(function(dom){
+    var domCell = document.createElement('div');
+    domCell.className = 'mcg-domcell';
+    domCell.innerHTML = '<span class="mcg-domico">'+dom.ico+'</span><span>'+dom.lbl+'</span>';
+    gridDiv.appendChild(domCell);
+    for(var di=0; di<7; di++){
+      var cellData = grid.days[di][dom.id] || {st:0};
+      var stIco = ['\u2715','!','\u2713'][cellData.st];
+      var stCls = ['no','care','ok'][cellData.st];
+      var cell = document.createElement('div');
+      cell.className = 'mcg-cell '+stCls;
+      cell.dataset.dayidx = di;
+      cell.dataset.domid = dom.id;
+      var html = '';
+      if(cellData.rpe!==undefined && cellData.rpe!==null && cellData.rpe!=='') html += '<div class="mcg-crpe">R'+cellData.rpe+'</div>';
+      if(cellData.eva!==undefined && cellData.eva!==null && cellData.eva!=='') html += '<div class="mcg-ceva">E'+cellData.eva+'</div>';
+      html += '<div class="mcg-cs">'+stIco+'</div>';
+      if(cellData.det) html += '<div class="mcg-cdet">'+cellData.det+'</div>';
+      cell.innerHTML = html;
+      gridDiv.appendChild(cell);
+    }
+  });
+
+  container.appendChild(gridDiv);
+
+  // Save button row
+  var saveRow = document.createElement('div');
+  saveRow.style.cssText = 'display:flex;justify-content:flex-end;margin-top:10px;gap:8px;align-items:center';
+  saveRow.innerHTML = '<span style="font-size:10px;color:var(--txt3)" data-role="upd"></span>'
+    + '<button class="bsave" data-act="save">Guardar MC</button>';
+  container.appendChild(saveRow);
+
+  // Wire events on container
+  container.onclick = function(e){
+    var act = e.target.closest('[data-act]');
+    if(act){
+      var a = act.dataset.act;
+      if(a==='prev'){ mcgViewing[jKey] = Math.max(1, mcNum-1); mcgRenderGrid(jKey, container); return; }
+      if(a==='next'){ mcgViewing[jKey] = mcNum+1; mcgRenderGrid(jKey, container); return; }
+      if(a==='tpl'){
+        if(!confirm('Aplicar la plantilla de la fase actual al MC '+mcNum+'? Esto reemplaza los valores cargados.')) return;
+        var fase = (rehabMap[jKey] && rehabMap[jKey].fase) || 0;
+        mcgApplyTemplate(jKey, mcNum, fase);
+        mcgRenderGrid(jKey, container);
+        toast('Plantilla F'+fase+' aplicada');
+        return;
+      }
+      if(a==='save'){
+        var btn = act;
+        btn.textContent = 'Guardando...';
+        btn.disabled = true;
+        mcgSaveToSupabase(jKey, mcNum).then(function(){
+          btn.textContent = 'Guardar MC';
+          btn.disabled = false;
+          var u = container.querySelector('[data-role="upd"]');
+          if(u) u.textContent = 'Guardado ' + new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
+          toast('MC '+mcNum+' guardado');
+        }).catch(function(err){
+          btn.textContent = 'Error - reintentar';
+          btn.disabled = false;
+          console.error(err);
+        });
+        return;
+      }
+    }
+    // Cell click
+    var cellEl = e.target.closest('.mcg-cell');
+    if(cellEl){
+      mcgOpenModal(jKey, mcNum, cellEl.dataset.domid, parseInt(cellEl.dataset.dayidx));
+    }
+  };
+  container.oninput = function(e){
+    var f = e.target.dataset.field;
+    if(f==='rpe_obj' || f==='eva_obj'){
+      var v = e.target.value.trim();
+      grid[f] = v===''?null:parseFloat(v);
+    }
+  };
+}
+
+// ═══ MODAL DE CELDA ═══════════════════════════════════════
+function mcgGetDomFields(domId){
+  var fields = {
+    gim:[
+      {type:'slider', key:'rm', lbl:'% RM', min:0, max:100, suffix:'%'},
+      {type:'chips', key:'grupos', lbl:'Grupos musculares', opts:['Tren sup','Core','Tren inf','Completo'], multi:true},
+      {type:'chips', key:'tipo', lbl:'Tipo de contraccion', opts:['Concentrico','Excentrico','Isometrico']}
+    ],
+    aer:[
+      {type:'slider', key:'min', lbl:'Duracion (min)', min:0, max:90, suffix:'min'},
+      {type:'chips', key:'zona', lbl:'Zona FC', opts:['Z1','Z2','Z3']},
+      {type:'chips', key:'sup', lbl:'Superficie', opts:['Bici','Cinta','Campo','Eliptica']}
+    ],
+    int:[
+      {type:'chips', key:'tipo', lbl:'Tipo', opts:['HIIT','RSA','Box2box','COD interm']},
+      {type:'slider', key:'vol', lbl:'Volumen (min)', min:0, max:60, suffix:'min'},
+      {type:'slider', key:'int', lbl:'% Intensidad', min:50, max:100, suffix:'%'}
+    ],
+    spr:[
+      {type:'slider', key:'pct', lbl:'% Vmax', min:50, max:100, suffix:'%'},
+      {type:'slider', key:'dist', lbl:'Distancia (m)', min:0, max:60, suffix:'m'},
+      {type:'slider', key:'reps', lbl:'Repeticiones', min:0, max:20, suffix:''}
+    ],
+    cod:[
+      {type:'chips', key:'ang', lbl:'Angulo', opts:['<45°','45-90°','>90°']},
+      {type:'slider', key:'pct', lbl:'% Velocidad', min:50, max:100, suffix:'%'},
+      {type:'chips', key:'tipo', lbl:'Tipo', opts:['Planeados','Reactivos']}
+    ],
+    tec:[
+      {type:'chips', key:'mod', lbl:'Modalidad', opts:['Individual','Pareja','Grupal']},
+      {type:'chips', key:'tipo', lbl:'Tipo', opts:['Conduccion','Pase','Definicion','Mixto']},
+      {type:'slider', key:'min', lbl:'Duracion (min)', min:0, max:60, suffix:'min'}
+    ],
+    tac:[
+      {type:'chips', key:'fmt', lbl:'Formato', opts:['Reducido','Posicional','Futbol completo']},
+      {type:'chips', key:'cont', lbl:'Contacto', opts:['Sin','Controlado','Libre']},
+      {type:'slider', key:'min', lbl:'Duracion (min)', min:0, max:60, suffix:'min'}
+    ],
+    pli:[
+      {type:'chips', key:'tipo', lbl:'Tipo', opts:['Vertical','Horizontal','Lateral']},
+      {type:'chips', key:'lat', lbl:'Lateralidad', opts:['Unilateral','Bilateral']},
+      {type:'slider', key:'vol', lbl:'Volumen (saltos)', min:0, max:100, suffix:''}
+    ],
+    con:[
+      {type:'chips', key:'nivel', lbl:'Nivel', opts:['Prohibido','Controlado','Libre']},
+      {type:'chips', key:'ctx', lbl:'Contexto', opts:['Reducido','Posicional','Disputa']}
+    ]
+  };
+  return fields[domId] || [];
+}
+
+function mcgOpenModal(jKey, mcNum, domId, dayIdx){
+  var grid = mcgGetGrid(jKey, mcNum);
+  var cell = grid.days[dayIdx][domId] || {st:0};
+  var domDef = MCG_DOMAINS.find(function(d){return d.id===domId;});
+  mcgModalCtx = {jKey:jKey, mcNum:mcNum, domId:domId, dayIdx:dayIdx, data:JSON.parse(JSON.stringify(cell))};
+
+  var modal = qs('mcg-modal');
+  if(!modal){
+    modal = document.createElement('div');
+    modal.id = 'mcg-modal';
+    modal.className = 'mcm-bg';
+    modal.innerHTML = '<div class="mcm" id="mcg-modal-body"></div>';
+    document.body.appendChild(modal);
+    modal.addEventListener('click', function(e){
+      if(e.target===modal) mcgCloseModal();
+    });
+  }
+
+  var rng = mcgMCRange(mcNum);
+  var startD = new Date(rng.start+'T12:00:00');
+  var thisD = new Date(startD.getTime()+dayIdx*86400000);
+  var dateStr = thisD.toLocaleDateString('es-AR',{day:'2-digit',month:'short',year:'numeric'});
+
+  var fields = mcgGetDomFields(domId);
+  var body = qs('mcg-modal-body');
+  body.innerHTML = ''
+    + '<div class="mcm-head">'
+    +   '<div><div class="mcm-title">'+domDef.ico+' '+domDef.lbl+' - '+MCG_DAYS_FULL[dayIdx]+'</div>'
+    +   '<div class="mcm-sub">MC '+mcNum+' · '+dateStr+'</div></div>'
+    +   '<button class="mcm-close" onclick="mcgCloseModal()">&#x2715;</button>'
+    + '</div>'
+    + '<div class="mcm-section">'
+    +   '<div class="mcm-lbl">Estado</div>'
+    +   '<div class="mcm-cycle">'
+    +     '<div class="mcm-co no'+(cell.st===0?' on':'')+'" data-st="0">&#x2715; No puede</div>'
+    +     '<div class="mcm-co care'+(cell.st===1?' on':'')+'" data-st="1">! Con restricciones</div>'
+    +     '<div class="mcm-co ok'+(cell.st===2?' on':'')+'" data-st="2">&#x2713; Libre</div>'
+    +   '</div>'
+    + '</div>'
+    + '<div id="mcg-domfields"></div>'
+    + '<div class="mcm-section">'
+    +   '<div class="mcm-lbl">Metricas de la sesion</div>'
+    +   '<div class="mcm-dual">'
+    +     '<div class="mcm-ds">'
+    +       '<div class="mcm-dslbl">RPE sesion <span id="mcg-rpev">'+(cell.rpe||'-')+'</span></div>'
+    +       '<input type="range" class="mcm-sl" min="0" max="10" value="'+(cell.rpe||0)+'" id="mcg-rpe">'
+    +     '</div>'
+    +     '<div class="mcm-ds">'
+    +       '<div class="mcm-dslbl">EVA dolor <span id="mcg-evav">'+(cell.eva||'-')+'</span></div>'
+    +       '<input type="range" class="mcm-sl" min="0" max="10" value="'+(cell.eva||0)+'" id="mcg-eva">'
+    +     '</div>'
+    +   '</div>'
+    + '</div>'
+    + '<div class="mcm-section">'
+    +   '<div class="mcm-lbl">Notas adicionales (opcional)</div>'
+    +   '<textarea class="mcm-input" rows="2" id="mcg-notes" placeholder="Ej: evitar peso muerto, cuidar tren inferior izq...">'+(cell.notas||'')+'</textarea>'
+    + '</div>'
+    + '<div class="mcm-acts">'
+    +   '<button class="mcm-can" onclick="mcgCloseModal()">Cancelar</button>'
+    +   '<button class="mcm-save" onclick="mcgSaveModal()">Aplicar</button>'
+    + '</div>';
+
+  // Render domain-specific fields
+  var df = qs('mcg-domfields');
+  df.innerHTML = '';
+  fields.forEach(function(f){
+    var sec = document.createElement('div');
+    sec.className = 'mcm-section';
+    var curVal = cell[f.key];
+    if(f.type==='slider'){
+      sec.innerHTML = '<div class="mcm-lbl">'+f.lbl+'</div>'
+        +'<div class="mcm-slrow">'
+        +'<input type="range" class="mcm-sl" min="'+f.min+'" max="'+f.max+'" value="'+(curVal||f.min)+'" data-key="'+f.key+'">'
+        +'<span class="mcm-slv">'+(curVal||f.min)+f.suffix+'</span>'
+        +'</div>';
+    }else if(f.type==='chips'){
+      var sel = curVal || (f.multi?[]:null);
+      var chipsHtml = f.opts.map(function(o){
+        var isOn = f.multi ? (sel.indexOf(o)>=0) : (sel===o);
+        return '<div class="mcm-chip'+(isOn?' on':'')+'" data-val="'+o+'">'+o+'</div>';
+      }).join('');
+      sec.innerHTML = '<div class="mcm-lbl">'+f.lbl+'</div>'
+        +'<div class="mcm-chips" data-key="'+f.key+'" data-multi="'+(f.multi?'1':'0')+'">'+chipsHtml+'</div>';
+    }
+    df.appendChild(sec);
+  });
+
+  // Wire interactions
+  body.addEventListener('click', mcgModalClick);
+  body.addEventListener('input', mcgModalInput);
+  modal.classList.add('on');
+}
+
+function mcgModalClick(e){
+  var st = e.target.closest('.mcm-co');
+  if(st){
+    document.querySelectorAll('.mcm-co').forEach(function(o){o.classList.remove('on');});
+    st.classList.add('on');
+    return;
+  }
+  var chip = e.target.closest('.mcm-chip');
+  if(chip){
+    var box = chip.parentElement;
+    var multi = box.dataset.multi==='1';
+    if(multi){
+      chip.classList.toggle('on');
+    }else{
+      box.querySelectorAll('.mcm-chip').forEach(function(c){c.classList.remove('on');});
+      chip.classList.add('on');
+    }
+  }
+}
+
+function mcgModalInput(e){
+  if(e.target.classList.contains('mcm-sl')){
+    var k = e.target.dataset.key;
+    if(k){
+      // domain slider
+      var v = e.target.value;
+      var f = mcgGetDomFields(mcgModalCtx.domId).find(function(x){return x.key===k;});
+      e.target.parentElement.querySelector('.mcm-slv').textContent = v + (f?f.suffix:'');
+    }else if(e.target.id==='mcg-rpe'){
+      qs('mcg-rpev').textContent = e.target.value;
+    }else if(e.target.id==='mcg-eva'){
+      qs('mcg-evav').textContent = e.target.value;
+    }
+  }
+}
+
+function mcgCloseModal(){
+  var m = qs('mcg-modal');
+  if(m) m.classList.remove('on');
+  mcgModalCtx = null;
+}
+
+function mcgSaveModal(){
+  if(!mcgModalCtx) return;
+  var ctx = mcgModalCtx;
+  var grid = mcgGetGrid(ctx.jKey, ctx.mcNum);
+  var cell = {};
+
+  // Estado
+  var stEl = document.querySelector('.mcm-co.on');
+  cell.st = stEl ? parseInt(stEl.dataset.st) : 0;
+
+  // Dominio fields
+  mcgGetDomFields(ctx.domId).forEach(function(f){
+    if(f.type==='slider'){
+      var s = document.querySelector('[data-key="'+f.key+'"].mcm-sl');
+      if(s) cell[f.key] = parseInt(s.value);
+    }else if(f.type==='chips'){
+      var box = document.querySelector('[data-key="'+f.key+'"].mcm-chips');
+      if(box){
+        var multi = box.dataset.multi==='1';
+        var on = Array.from(box.querySelectorAll('.mcm-chip.on')).map(function(c){return c.dataset.val;});
+        cell[f.key] = multi ? on : (on[0]||null);
+      }
+    }
+  });
+
+  // RPE / EVA / notas
+  var rpe = qs('mcg-rpe').value;
+  var eva = qs('mcg-eva').value;
+  cell.rpe = rpe==='0' ? null : parseInt(rpe);
+  cell.eva = eva==='0' ? null : parseInt(eva);
+  var notes = qs('mcg-notes').value.trim();
+  if(notes) cell.notas = notes;
+
+  // Detail summary
+  cell.det = mcgBuildDetail(ctx.domId, cell);
+
+  grid.days[ctx.dayIdx][ctx.domId] = cell;
+  mcgCloseModal();
+
+  // Re-render the specific card's grid
+  var rcEl = qs('rc-'+ctx.jKey);
+  if(rcEl){
+    var mcgCont = rcEl.querySelector('.mcg-wrap');
+    if(mcgCont) mcgRenderGrid(ctx.jKey, mcgCont);
+  }
+}
+
+// Build short summary text for the cell
+function mcgBuildDetail(domId, cell){
+  if(cell.st===0) return '';
+  var parts = [];
+  if(domId==='gim'){
+    if(cell.rm) parts.push(cell.rm+'%');
+    if(cell.grupos && cell.grupos.length) parts.push(cell.grupos.join('+'));
+  }else if(domId==='aer'){
+    if(cell.min) parts.push(cell.min+'min');
+    if(cell.zona) parts.push(cell.zona);
+  }else if(domId==='int'){
+    if(cell.tipo) parts.push(cell.tipo);
+    if(cell.vol) parts.push(cell.vol+'min');
+    if(cell.int) parts.push(cell.int+'%');
+  }else if(domId==='spr'){
+    if(cell.pct) parts.push(cell.pct+'% Vmax');
+    if(cell.dist) parts.push(cell.dist+'m');
+    if(cell.reps) parts.push('x'+cell.reps);
+  }else if(domId==='cod'){
+    if(cell.ang) parts.push(cell.ang);
+    if(cell.pct) parts.push(cell.pct+'%');
+  }else if(domId==='tec'){
+    if(cell.mod) parts.push(cell.mod);
+    if(cell.min) parts.push(cell.min+'min');
+  }else if(domId==='tac'){
+    if(cell.fmt) parts.push(cell.fmt);
+    if(cell.cont) parts.push(cell.cont);
+  }else if(domId==='pli'){
+    if(cell.tipo) parts.push(cell.tipo);
+    if(cell.lat) parts.push(cell.lat);
+  }else if(domId==='con'){
+    if(cell.nivel) parts.push(cell.nivel);
+  }
+  return parts.join(' · ').substring(0,28);
+}
+
+// ═══ SUPABASE ═════════════════════════════════════════════
+async function mcgLoadFromSupabase(){
+  try{
+    var res = await sb.from('microciclos_rehab').select('*');
+    if(res.data){
+      mcgCache = {};
+      res.data.forEach(function(r){
+        if(!mcgCache[r.jugador_key]) mcgCache[r.jugador_key] = {};
+        mcgCache[r.jugador_key][r.mc_numero] = {
+          rpe_obj: r.rpe_objetivo,
+          eva_obj: r.eva_max_objetivo,
+          days: (r.grid && r.grid.days) ? r.grid.days : mcgEmptyGrid().days
+        };
+      });
+    }
+  }catch(e){
+    console.error('mcg load error', e);
+  }
+}
+
+async function mcgSaveToSupabase(jKey, mcNum){
+  if(!currentUser) return;
+  var grid = mcgGetGrid(jKey, mcNum);
+  var rng = mcgMCRange(mcNum);
+  // get nombre from data
+  var d = allData.find(function(x){return rKey(x.nombre)===jKey;});
+  var payload = {
+    jugador_key: jKey,
+    mc_numero: mcNum,
+    mc_start_date: rng.start || null,
+    rpe_objetivo: grid.rpe_obj,
+    eva_max_objetivo: grid.eva_obj,
+    grid: {days: grid.days},
+    updated_at: new Date().toISOString()
+  };
+  var res = await sb.from('microciclos_rehab').upsert(payload, {onConflict:'jugador_key,mc_numero'});
+  if(res.error) throw res.error;
+}
+
+
 function renderRehab(){
   var catF=qs('rh-cat').value;
   var activos=allData.filter(function(d){return d.activo;});
@@ -858,69 +1521,56 @@ function renderRehab(){
       +'</div>';
     head.addEventListener('click',function(){card.classList.toggle('op');});
     var body=document.createElement('div');body.className='rcb';
-    var agDiv=document.createElement('div');agDiv.className='ag';agDiv.id='ag-'+k;
-    ACTS.forEach(function(a){
-      var st=(rh.acts[a.id]||{st:0}).st;
-      var cell=document.createElement('div');
-      cell.className='ac '+['no','care','ok'][st];cell.id='ac-'+k+'-'+a.id;
-      cell.innerHTML='<span class="aico" style="font-size:16px;display:block;margin-bottom:2px">'+(AICO[a.id]||a.id)+'</span><span class="albl">'+a.lbl+'</span><span class="ast">'+['X','!','OK'][st]+'</span>';
-      cell.addEventListener('click',function(){
-        var cur=(rehabMap[k]&&rehabMap[k].acts[a.id]?rehabMap[k].acts[a.id].st:0);
-        var nxt=(cur+1)%3;
-        if(!rehabMap[k])getOrInit(d.nombre);
-        rehabMap[k].acts[a.id]={st:nxt};
-        cell.className='ac '+['no','care','ok'][nxt];
-        cell.querySelector('.ast').textContent=['X','!','OK'][nxt];
-      });
-      agDiv.appendChild(cell);
+    // Phase selector + nota row (top of body)
+    var topRow=document.createElement('div');topRow.style.cssText='display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap';
+    var flbl=document.createElement('span');flbl.className='flbl';flbl.textContent='Fase:';
+    var sel=document.createElement('select');sel.className='fsel';sel.id='fs-'+k;
+    FN.forEach(function(fn,i){var o=document.createElement('option');o.value=i;o.textContent=fn;if(rh.fase===i)o.selected=true;sel.appendChild(o);});
+    sel.addEventListener('change',async function(){
+      var fase=parseInt(sel.value);
+      if(!rehabMap[k])getOrInit(d.nombre);
+      rehabMap[k].fase=fase;
+      var fb=qs('fb-'+k);if(fb){fb.className='fb '+FC[fase];fb.textContent=FN[fase];}
+      saveR();
+      await saveRehabToSupabase(k,d.nombre);
+      toast('Fase actualizada a F'+fase);
     });
+    var bsave=document.createElement('button');bsave.className='bsave';bsave.textContent='Guardar nota';
+    var upd=document.createElement('span');upd.className='upd';upd.id='upd-'+k;upd.style.cssText='font-size:10px;color:var(--txt3)';upd.textContent='Actualizado: '+(rh.upd||'hoy');
+    topRow.appendChild(flbl);topRow.appendChild(sel);
+    topRow.appendChild(document.createElement('div')).style.cssText='flex:1';
+    topRow.appendChild(upd);
+    body.appendChild(topRow);
+
     var notaLbl=document.createElement('div');
     notaLbl.style.cssText='font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--txt3);margin-bottom:3px;margin-top:0';
     notaLbl.textContent='Nota para el profe';
     var nota=document.createElement('textarea');
     nota.className='ni';nota.id='nota-'+k;nota.rows=2;nota.placeholder='Ej: Cuidado con cambios de direccion...';
     nota.value=rh.nota||'';
-    var foot=document.createElement('div');foot.className='rfoot';
-    var lft=document.createElement('div');lft.style.cssText='display:flex;align-items:center;gap:7px';
-    var flbl=document.createElement('span');flbl.className='flbl';flbl.textContent='Fase:';
-    var sel=document.createElement('select');sel.className='fsel';sel.id='fs-'+k;
-    FN.forEach(function(fn,i){var o=document.createElement('option');o.value=i;o.textContent=fn;if(rh.fase===i)o.selected=true;sel.appendChild(o);});
-    sel.addEventListener('change',function(){
-      var fase=parseInt(sel.value);
-      if(!rehabMap[k])getOrInit(d.nombre);
-      rehabMap[k].fase=fase;
-      var p=FP[fase];
-      ACTS.forEach(function(a){
-        var st=p[a.id]!==undefined?p[a.id]:0;
-        if(!rehabMap[k].acts[a.id])rehabMap[k].acts[a.id]={st:0};
-        rehabMap[k].acts[a.id].st=st;
-        var cell=qs('ac-'+k+'-'+a.id);
-        if(cell){cell.className='ac '+['no','care','ok'][st];cell.querySelector('.ast').textContent=['X','!','OK'][st];}
-      });
-      var fb=qs('fb-'+k);if(fb){fb.className='fb '+FC[fase];fb.textContent=FN[fase];}
-    });
-    lft.appendChild(flbl);lft.appendChild(sel);
-    var rgt=document.createElement('div');rgt.style.cssText='display:flex;align-items:center;gap:7px';
-    var upd=document.createElement('span');upd.className='upd';upd.id='upd-'+k;upd.textContent='Actualizado: '+(rh.upd||'hoy');
-    var bsave=document.createElement('button');bsave.className='bsave';bsave.textContent='Guardar';
+    body.appendChild(notaLbl);body.appendChild(nota);
+
+    var notaSaveRow=document.createElement('div');notaSaveRow.style.cssText='display:flex;justify-content:flex-end;margin-top:6px';
+    notaSaveRow.appendChild(bsave);
+    body.appendChild(notaSaveRow);
     bsave.addEventListener('click',async function(){
       if(!rehabMap[k])getOrInit(d.nombre);
       rehabMap[k].nota=nota.value;
       rehabMap[k].fase=parseInt(sel.value);
-      ACTS.forEach(function(a){
-        var cell=qs('ac-'+k+'-'+a.id);
-        if(cell){var st=cell.classList.contains('ok')?2:cell.classList.contains('care')?1:0;rehabMap[k].acts[a.id]={st:st};}
-      });
       rehabMap[k].upd=new Date().toISOString().slice(0,10);
       saveR();
       bsave.textContent='Guardando...';bsave.disabled=true;
       await saveRehabToSupabase(k,d.nombre);
-      bsave.textContent='Guardar';bsave.disabled=false;
-      upd.textContent='Actualizado: hoy';toast('Readaptacion guardada');
+      bsave.textContent='Guardar nota';bsave.disabled=false;
+      upd.textContent='Actualizado: hoy';toast('Nota guardada');
     });
-    rgt.appendChild(upd);rgt.appendChild(bsave);
-    foot.appendChild(lft);foot.appendChild(rgt);
-    body.appendChild(agDiv);body.appendChild(notaLbl);body.appendChild(nota);body.appendChild(foot);
+
+    // NEW: MC weekly grid container
+    var mcgWrap=document.createElement('div');
+    mcgWrap.className='mcg-wrap';
+    body.appendChild(mcgWrap);
+    // Render grid asynchronously after appending
+    setTimeout(function(){ mcgRenderGrid(k, mcgWrap); }, 0);
     card.appendChild(head);card.appendChild(body);
     grid.appendChild(card);
   });
@@ -1309,6 +1959,7 @@ async function loadFromSupabase(){
       });
     }
     // Load config
+    await mcgLoadFromSupabase();
     var resC=await sb.from('config').select('*').eq('key','season_start').single();
     if(resC.data&&resC.data.value)seasonStart=resC.data.value;
     var sel=qs('season-start');if(sel)sel.value=seasonStart;
