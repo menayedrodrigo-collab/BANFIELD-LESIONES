@@ -2012,10 +2012,10 @@ function mcpOpenCellModal(domId, dayIdx){
   html += '<div class="mcm2-dup">'
     + '<div class="mcm2-dup-title">⎘ Duplicar esta configuracion</div>'
     + '<div class="mcm2-dup-btns">'
-    + '<button class="mcm2-dup-btn" onclick="mcm2Dup(\'lv\')">A lun-vie</button>'
-    + '<button class="mcm2-dup-btn" onclick="mcm2Dup(\'week\')">A toda la semana</button>'
-    + '<button class="mcm2-dup-btn" onclick="mcm2Dup(\'mw\')">A miercoles + viernes</button>'
-    + '<button class="mcm2-dup-btn" onclick="mcm2Dup(\'tj\')">A martes + jueves</button>'
+    + '<button class="mcm2-dup-btn" data-dup="lv">A lun-vie</button>'
+    + '<button class="mcm2-dup-btn" data-dup="week">A toda la semana</button>'
+    + '<button class="mcm2-dup-btn" data-dup="mw">A miercoles + viernes</button>'
+    + '<button class="mcm2-dup-btn" data-dup="tj">A martes + jueves</button>'
     + '</div>'
     + '</div>';
 
@@ -2050,6 +2050,11 @@ function mcm2InnerClick(e){
       box.querySelectorAll('.mcm2-chip').forEach(function(c){c.classList.remove('on');});
       chip.classList.add('on');
     }
+    return;
+  }
+  var dup = e.target.closest('[data-dup]');
+  if(dup){
+    mcm2Dup(dup.dataset.dup);
   }
 }
 
