@@ -318,6 +318,153 @@ tbody td{padding:8px 12px;vertical-align:middle}
   .mcm{padding:14px 16px}
 }
 
+
+/* === MC FULLSCREEN PANEL === */
+.mcp-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:350;overflow-y:auto}
+.mcp-bg.on{display:block}
+.mcp-panel{max-width:1300px;margin:30px auto;background:var(--bg2);border:1px solid var(--brd2);border-radius:12px;overflow:hidden;box-shadow:0 10px 50px rgba(0,0,0,.7)}
+.mcp-head{padding:18px 24px;border-bottom:1px solid var(--brd);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:var(--bg3)}
+.mcp-title{font-family:Oswald,sans-serif;font-weight:700;font-size:20px;letter-spacing:1px;color:#E0EEE0}
+.mcp-sub{font-size:11px;color:var(--txt2);margin-top:3px}
+.mcp-close{background:transparent;border:1px solid var(--brd2);color:var(--txt2);padding:8px 14px;border-radius:6px;font-size:12px;cursor:pointer;font-family:Inter,sans-serif;transition:all .15s}
+.mcp-close:hover{border-color:var(--red);color:var(--red)}
+.mcp-body{padding:20px 24px}
+
+.mcp-nav{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.mcp-mcnav{display:flex;align-items:center;background:var(--bg3);border:1px solid var(--brd2);border-radius:6px;overflow:hidden}
+.mcp-mcnb{background:transparent;border:none;color:var(--txt2);padding:7px 14px;font-size:15px;cursor:pointer}
+.mcp-mcnb:hover:not(:disabled){background:var(--brd2);color:var(--txt)}
+.mcp-mcnb:disabled{opacity:.3;cursor:default}
+.mcp-mcinfo{padding:6px 16px;border-left:1px solid var(--brd2);border-right:1px solid var(--brd2);text-align:center;min-width:150px}
+.mcp-mcnum{font-family:Oswald,sans-serif;font-weight:700;font-size:14px;color:#E0EEE0;letter-spacing:1px}
+.mcp-mcdates{font-size:10px;color:var(--txt2);margin-top:2px}
+.mcp-tpl{background:rgba(62,160,62,.08);border:1px solid rgba(62,160,62,.25);color:var(--g3);padding:7px 14px;border-radius:6px;font-size:11.5px;cursor:pointer;font-weight:500;font-family:Inter,sans-serif}
+.mcp-tpl:hover{background:rgba(62,160,62,.15)}
+.mcp-copy{background:rgba(138,112,64,.08);border:1px solid rgba(138,112,64,.25);color:var(--gold2);padding:7px 14px;border-radius:6px;font-size:11.5px;cursor:pointer;font-weight:500;font-family:Inter,sans-serif}
+.mcp-copy:hover{background:rgba(138,112,64,.15)}
+
+.mcp-obj{display:flex;gap:18px;align-items:center;background:var(--bg3);border:1px solid var(--brd);border-radius:6px;padding:10px 14px;margin-bottom:14px;flex-wrap:wrap}
+.mcp-obj-item{display:flex;align-items:center;gap:7px}
+.mcp-obj-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--txt2)}
+.mcp-obj-input{background:var(--bg4);border:1px solid var(--brd2);color:var(--txt);padding:5px 9px;border-radius:4px;font-family:Oswald,sans-serif;font-size:14px;font-weight:600;width:50px;text-align:center;outline:none}
+.mcp-obj-input:focus{border-color:var(--g2)}
+.mcp-obj-real{font-family:Oswald,sans-serif;font-size:12px;color:var(--txt3)}
+.mcp-obj-real strong{color:var(--g3);font-size:14px}
+.mcp-stat{font-size:10px;padding:2px 8px;border-radius:3px;font-weight:600;letter-spacing:.3px;text-transform:uppercase}
+.mcp-stat.ok{background:rgba(62,160,62,.12);color:var(--g3);border:1px solid rgba(62,160,62,.25)}
+.mcp-stat.warn{background:rgba(138,112,64,.12);color:var(--gold2);border:1px solid rgba(138,112,64,.25)}
+.mcp-stat.bad{background:rgba(184,48,48,.12);color:var(--red);border:1px solid rgba(184,48,48,.25)}
+
+/* GRILLA GRANDE */
+.mcp-grid{display:grid;grid-template-columns:155px repeat(7,1fr);gap:4px;width:100%;min-width:900px}
+.mcp-th{padding:9px 4px;text-align:center;font-family:Oswald,sans-serif;font-size:11px;letter-spacing:1.5px;color:var(--txt2);background:var(--bg3);border-radius:4px;font-weight:600;text-transform:uppercase;cursor:pointer;transition:all .15s;position:relative}
+.mcp-th.dom{text-align:left;padding-left:12px;font-size:11.5px;color:var(--txt);font-weight:600;letter-spacing:.6px;cursor:default}
+.mcp-th.today{background:rgba(62,160,62,.12);color:var(--g3)}
+.mcp-th.we{opacity:.5}
+.mcp-th-day:hover{background:var(--brd2);color:var(--txt)}
+.mcp-th-day:hover::after{content:'⎘';position:absolute;top:50%;right:6px;transform:translateY(-50%);color:var(--gold2);font-size:13px}
+.mcp-domcell{background:var(--bg3);padding:10px 12px;border-radius:4px;font-family:Inter,sans-serif;font-weight:500;font-size:12px;color:var(--txt);display:flex;align-items:center;gap:7px;height:64px}
+.mcp-domico{font-size:16px;line-height:1;flex-shrink:0}
+.mcp-cell{background:var(--bg3);border:1px solid var(--brd);border-radius:4px;height:64px;cursor:pointer;transition:all .12s;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:4px;user-select:none;overflow:hidden}
+.mcp-cell:hover{border-color:var(--brd2);transform:translateY(-1px)}
+.mcp-cell.ok{border-color:rgba(62,160,62,.4);background:rgba(62,160,62,.07)}
+.mcp-cell.care{border-color:rgba(138,112,64,.4);background:rgba(138,112,64,.07)}
+.mcp-cell.no{border-color:rgba(184,48,48,.2);background:rgba(184,48,48,.04)}
+.mcp-cs{font-family:Oswald,sans-serif;font-size:16px;font-weight:700;line-height:1}
+.mcp-cell.ok .mcp-cs{color:var(--g3)}
+.mcp-cell.care .mcp-cs{color:var(--gold2)}
+.mcp-cell.no .mcp-cs{color:rgba(184,48,48,.55)}
+.mcp-cdet{font-size:10px;color:var(--txt2);margin-top:3px;line-height:1.15;text-align:center;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:Inter,sans-serif;padding:0 2px;font-weight:500}
+.mcp-cell.ok .mcp-cdet,.mcp-cell.care .mcp-cdet{color:var(--gold2)}
+.mcp-crpe{position:absolute;top:3px;left:5px;font-size:9px;color:var(--txt3);font-family:Oswald,sans-serif;font-weight:600;letter-spacing:.2px}
+.mcp-ceva{position:absolute;top:3px;right:5px;font-size:9px;color:var(--txt3);font-family:Oswald,sans-serif;font-weight:600;letter-spacing:.2px}
+.mcp-cell.no .mcp-crpe,.mcp-cell.no .mcp-ceva{display:none}
+
+.mcp-footer{margin-top:18px;padding-top:14px;border-top:1px solid var(--brd);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.mcp-footer-info{font-size:11px;color:var(--txt3)}
+.mcp-footer-info strong{color:var(--g3)}
+.mcp-savebig{background:var(--g1);border:none;color:#E0EEE0;padding:10px 24px;border-radius:6px;font-family:Oswald,sans-serif;font-size:13px;font-weight:600;letter-spacing:1.2px;cursor:pointer;text-transform:uppercase;transition:background .2s}
+.mcp-savebig:hover{background:var(--g2)}
+
+/* MODAL SIMPLIFICADO */
+.mcm2-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:500;align-items:center;justify-content:center;padding:20px}
+.mcm2-bg.on{display:flex}
+.mcm2{background:var(--bg2);border:1px solid var(--brd2);border-radius:10px;width:480px;max-width:94vw;max-height:90vh;overflow-y:auto;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+.mcm2-head{padding:18px 22px 12px;border-bottom:1px solid var(--brd);display:flex;justify-content:space-between;align-items:flex-start}
+.mcm2-title{font-family:Oswald,sans-serif;font-weight:700;font-size:15px;letter-spacing:1.5px;text-transform:uppercase;color:#E0EEE0}
+.mcm2-sub{font-size:11px;color:var(--txt2);margin-top:3px}
+.mcm2-close{background:transparent;border:none;color:var(--txt2);font-size:20px;cursor:pointer;padding:0 6px;line-height:1}
+.mcm2-close:hover{color:var(--txt)}
+.mcm2-body{padding:16px 22px}
+.mcm2-sec{margin-bottom:14px}
+.mcm2-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--txt2);margin-bottom:6px}
+.mcm2-cycle{display:flex;gap:5px;background:var(--bg3);padding:4px;border-radius:6px;border:1px solid var(--brd2)}
+.mcm2-co{flex:1;padding:9px 10px;border-radius:4px;text-align:center;cursor:pointer;font-size:12px;font-weight:600;transition:all .15s;font-family:Oswald,sans-serif;letter-spacing:.5px}
+.mcm2-co.on.no{background:rgba(184,48,48,.15);color:var(--red);border:1px solid rgba(184,48,48,.3)}
+.mcm2-co.on.care{background:rgba(138,112,64,.15);color:var(--gold2);border:1px solid rgba(138,112,64,.3)}
+.mcm2-co.on.ok{background:rgba(62,160,62,.15);color:var(--g3);border:1px solid rgba(62,160,62,.3)}
+.mcm2-co:not(.on){color:var(--txt3)}
+.mcm2-co:not(.on):hover{color:var(--txt2)}
+
+.mcm2-quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.mcm2-quick-item{}
+.mcm2-quick-lbl{font-size:9.5px;color:var(--txt2);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center}
+.mcm2-quick-lbl span{font-family:Oswald,sans-serif;font-size:13px;color:#E0EEE0;font-weight:700}
+.mcm2-num{width:100%;background:var(--bg3);border:1px solid var(--brd2);color:var(--txt);padding:7px 9px;border-radius:5px;font-family:Oswald,sans-serif;font-size:14px;font-weight:600;outline:none;text-align:center}
+.mcm2-num:focus{border-color:var(--g2)}
+
+.mcm2-toggle{margin:14px 0 8px;background:transparent;border:1px dashed var(--brd2);color:var(--txt2);padding:7px 12px;border-radius:5px;font-size:11px;cursor:pointer;font-family:Inter,sans-serif;width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center;transition:all .15s}
+.mcm2-toggle:hover{border-color:var(--brd2);color:var(--txt)}
+.mcm2-extra{display:none;background:var(--bg3);border:1px solid var(--brd);border-radius:6px;padding:12px;margin-bottom:14px}
+.mcm2-extra.on{display:block}
+.mcm2-extra .mcm2-sec{margin-bottom:11px}
+.mcm2-extra .mcm2-sec:last-child{margin-bottom:0}
+
+.mcm2-input{width:100%;background:var(--bg2);border:1px solid var(--brd2);color:var(--txt);padding:6px 9px;border-radius:4px;font-family:Inter,sans-serif;font-size:11.5px;outline:none}
+.mcm2-input:focus{border-color:var(--g2)}
+.mcm2-chips{display:flex;gap:5px;flex-wrap:wrap}
+.mcm2-chip{background:var(--bg2);border:1px solid var(--brd2);color:var(--txt2);padding:5px 11px;border-radius:14px;font-size:11px;cursor:pointer;transition:all .15s;user-select:none}
+.mcm2-chip:hover{color:var(--txt)}
+.mcm2-chip.on{background:rgba(62,160,62,.12);border-color:var(--g2);color:var(--g3)}
+
+.mcm2-dup{background:rgba(138,112,64,.05);border:1px dashed rgba(138,112,64,.2);border-radius:6px;padding:10px;margin-top:8px}
+.mcm2-dup-title{font-size:10px;color:var(--gold2);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
+.mcm2-dup-btns{display:flex;gap:6px;flex-wrap:wrap}
+.mcm2-dup-btn{background:transparent;border:1px solid rgba(138,112,64,.3);color:var(--gold2);padding:5px 10px;border-radius:4px;font-size:10.5px;cursor:pointer;font-family:Inter,sans-serif;transition:all .15s}
+.mcm2-dup-btn:hover{background:rgba(138,112,64,.1)}
+
+.mcm2-foot{padding:14px 22px;border-top:1px solid var(--brd);display:flex;justify-content:space-between;gap:8px;background:var(--bg3)}
+.mcm2-can{background:transparent;border:1px solid var(--brd2);color:var(--txt2);padding:8px 16px;border-radius:5px;font-size:12px;cursor:pointer;font-family:Inter,sans-serif}
+.mcm2-can:hover{border-color:var(--txt2);color:var(--txt)}
+.mcm2-save{background:var(--g1);border:none;color:#E0EEE0;padding:8px 22px;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif}
+.mcm2-save:hover{background:var(--g2)}
+
+/* BOTÓN PARA ABRIR PANEL DESDE TARJETA */
+.mcp-open-btn{background:var(--g1);border:none;color:#E0EEE0;padding:8px 16px;border-radius:6px;font-family:Oswald,sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;cursor:pointer;text-transform:uppercase;width:100%;margin-top:12px;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.mcp-open-btn:hover{background:var(--g2)}
+.mcp-open-btn-icon{font-size:14px}
+
+/* MODAL DE COPIA DE DÍA */
+.mcd-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:600;align-items:center;justify-content:center}
+.mcd-bg.on{display:flex}
+.mcd{background:var(--bg2);border:1px solid var(--brd2);border-radius:8px;padding:20px 24px;width:380px;max-width:94vw}
+.mcd-title{font-family:Oswald,sans-serif;font-weight:700;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#E0EEE0;margin-bottom:14px}
+.mcd-row{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.mcd-row select{background:var(--bg3);border:1px solid var(--brd2);color:var(--txt);padding:6px 10px;border-radius:4px;font-family:Inter,sans-serif;font-size:12px;outline:none;flex:1}
+.mcd-foot{display:flex;justify-content:flex-end;gap:8px;margin-top:8px}
+
+@media (max-width:900px){
+  .mcp-panel{margin:0;border-radius:0;min-height:100vh}
+  .mcp-grid{min-width:700px;grid-template-columns:110px repeat(7,1fr)}
+  .mcp-domcell{height:50px;padding:6px 8px;font-size:10.5px;gap:5px}
+  .mcp-cell{height:50px}
+  .mcp-cs{font-size:13px}
+  .mcp-cdet{font-size:8.5px}
+}
+
+/* OCULTAR el viejo embed de grilla en tarjetas */
+.mcg-wrap{display:none !important}
+
 </style>
 </head>
 <body>
@@ -1494,6 +1641,622 @@ async function mcgSaveToSupabase(jKey, mcNum){
 }
 
 
+
+// ═══ MC FULLSCREEN PANEL (V2) ═══════════════════════════════
+var mcpCurrent = null; // { jKey, mcNum }
+var mcpDirty = false;  // Si hay cambios sin guardar
+
+function mcpOpen(jKey, jNombre){
+  var mcNum = mcgViewing[jKey] || mcgCurrentMC();
+  mcpCurrent = {jKey:jKey, jNombre:jNombre, mcNum:mcNum};
+  mcpDirty = false;
+
+  var panel = qs('mcp-panel-bg');
+  if(!panel){
+    panel = document.createElement('div');
+    panel.id = 'mcp-panel-bg';
+    panel.className = 'mcp-bg';
+    panel.innerHTML = '<div class="mcp-panel" id="mcp-panel-inner"></div>';
+    document.body.appendChild(panel);
+    panel.addEventListener('click', function(e){
+      if(e.target===panel){
+        if(mcpDirty && !confirm('Tenes cambios sin guardar. Cerrar igual?')) return;
+        mcpClose();
+      }
+    });
+  }
+  mcpRenderPanel();
+  panel.classList.add('on');
+}
+
+function mcpClose(){
+  var panel = qs('mcp-panel-bg');
+  if(panel) panel.classList.remove('on');
+  // Refresh the rehab cards in case fase changed
+  if(typeof renderRehab==='function') renderRehab();
+  mcpCurrent = null;
+  mcpDirty = false;
+}
+
+function mcpRenderPanel(){
+  if(!mcpCurrent) return;
+  var jKey = mcpCurrent.jKey;
+  var jNombre = mcpCurrent.jNombre;
+  var mcNum = mcpCurrent.mcNum;
+  var grid = mcgGetGrid(jKey, mcNum);
+  var rng = mcgMCRange(mcNum);
+  var curMC = mcgCurrentMC();
+  var isNow = mcNum === curMC;
+  var todayIdx = isNow ? (new Date().getDay()+6)%7 : -1;
+  var fase = (rehabMap[jKey] && rehabMap[jKey].fase) || 0;
+
+  // Calc RPE/EVA promedios
+  var rpeVals=[], evaVals=[];
+  for(var d=0;d<7;d++){
+    MCG_DOMAINS.forEach(function(dom){
+      var c = grid.days[d][dom.id];
+      if(c && c.st>0){
+        if(c.rpe!==undefined && c.rpe!==null && c.rpe!=='') rpeVals.push(parseFloat(c.rpe));
+        if(c.eva!==undefined && c.eva!==null && c.eva!=='') evaVals.push(parseFloat(c.eva));
+      }
+    });
+  }
+  var rpeAvg = rpeVals.length ? (rpeVals.reduce(function(a,b){return a+b;},0)/rpeVals.length).toFixed(1) : '-';
+  var evaAvg = evaVals.length ? (evaVals.reduce(function(a,b){return a+b;},0)/evaVals.length).toFixed(1) : '-';
+  var evaMax = evaVals.length ? Math.max.apply(null, evaVals) : 0;
+
+  var rpeStatus = 'ok', evaStatus = 'ok';
+  if(grid.rpe_obj && rpeVals.length){
+    var diff = Math.abs(parseFloat(rpeAvg) - parseFloat(grid.rpe_obj));
+    if(diff>=2) rpeStatus = 'warn';
+  }
+  if(grid.eva_obj && evaVals.length){
+    if(evaMax > parseFloat(grid.eva_obj)) evaStatus = 'bad';
+  }
+
+  var fName = FN[fase];
+
+  var html = ''
+    + '<div class="mcp-head">'
+    +   '<div>'
+    +     '<div class="mcp-title">'+jNombre+'</div>'
+    +     '<div class="mcp-sub">Planificacion semanal · Fase actual: <span style="color:var(--g3);font-weight:600">'+fName+'</span></div>'
+    +   '</div>'
+    +   '<button class="mcp-close" onclick="mcpCloseCheck()">Cerrar</button>'
+    + '</div>'
+    + '<div class="mcp-body">'
+    +   '<div class="mcp-nav">'
+    +     '<div class="mcp-mcnav">'
+    +       '<button class="mcp-mcnb" onclick="mcpNav(-1)"'+(mcNum<=1?' disabled':'')+'>&#8249;</button>'
+    +       '<div class="mcp-mcinfo">'
+    +         '<div class="mcp-mcnum">MC '+mcNum+(isNow?' · actual':'')+'</div>'
+    +         '<div class="mcp-mcdates">'+mcgFormatShort(rng.start)+' - '+mcgFormatShort(rng.end)+'</div>'
+    +       '</div>'
+    +       '<button class="mcp-mcnb" onclick="mcpNav(1)">&#8250;</button>'
+    +     '</div>'
+    +     '<button class="mcp-tpl" onclick="mcpApplyTemplate()">&#8635; Aplicar plantilla F'+fase+'</button>'
+    +     '<button class="mcp-copy" onclick="mcpOpenCopyDay()">&#8633; Copiar dia a dia</button>'
+    +     '<div style="flex:1"></div>'
+    +     '<button class="mcp-savebig" onclick="mcpSave()">Guardar MC '+mcNum+'</button>'
+    +   '</div>'
+    +   '<div class="mcp-obj">'
+    +     '<div class="mcp-obj-item">'
+    +       '<span class="mcp-obj-lbl">RPE objetivo</span>'
+    +       '<input class="mcp-obj-input" type="number" min="0" max="10" data-obj="rpe_obj" value="'+(grid.rpe_obj||'')+'" placeholder="-">'
+    +       '<span class="mcp-obj-real">real <strong>'+rpeAvg+'</strong></span>'
+    +       (grid.rpe_obj && rpeVals.length ? '<span class="mcp-stat '+rpeStatus+'">'+(rpeStatus==='ok'?'En target':'Fuera')+'</span>' : '')
+    +     '</div>'
+    +     '<div class="mcp-obj-item">'
+    +       '<span class="mcp-obj-lbl">EVA max aceptado</span>'
+    +       '<input class="mcp-obj-input" type="number" min="0" max="10" data-obj="eva_obj" value="'+(grid.eva_obj||'')+'" placeholder="-">'
+    +       '<span class="mcp-obj-real">pico <strong>'+evaMax+'</strong></span>'
+    +       (grid.eva_obj && evaVals.length ? '<span class="mcp-stat '+evaStatus+'">'+(evaStatus==='ok'?'Bajo umbral':'Alerta')+'</span>' : '')
+    +     '</div>'
+    +   '</div>'
+    +   '<div style="overflow-x:auto"><div class="mcp-grid" id="mcp-grid-content"></div></div>'
+    +   '<div class="mcp-footer">'
+    +     '<div class="mcp-footer-info">Clic en celda para editar · Clic en cabecera de dia para copiar a otro dia</div>'
+    +     '<button class="mcp-savebig" onclick="mcpSave()">Guardar MC '+mcNum+'</button>'
+    +   '</div>'
+    + '</div>';
+
+  var inner = qs('mcp-panel-inner');
+  inner.innerHTML = html;
+
+  // Build grid
+  var gridDiv = qs('mcp-grid-content');
+  gridDiv.appendChild(mcpBuildHeader(todayIdx));
+  MCG_DOMAINS.forEach(function(dom){
+    var domLbl = document.createElement('div');
+    domLbl.className = 'mcp-domcell';
+    domLbl.innerHTML = '<span class="mcp-domico">'+dom.ico+'</span><span>'+dom.lbl+'</span>';
+    gridDiv.appendChild(domLbl);
+    for(var di=0; di<7; di++){
+      gridDiv.appendChild(mcpBuildCell(dom, di, grid));
+    }
+  });
+
+  // Wire events
+  inner.addEventListener('input', function(e){
+    var f = e.target.dataset.obj;
+    if(f==='rpe_obj' || f==='eva_obj'){
+      var v = e.target.value.trim();
+      grid[f] = v===''?null:parseFloat(v);
+      mcpDirty = true;
+    }
+  });
+}
+
+function mcpBuildHeader(todayIdx){
+  var frag = document.createDocumentFragment();
+  var th = document.createElement('div');
+  th.className = 'mcp-th dom';
+  th.textContent = 'Dominio';
+  frag.appendChild(th);
+  ['LUN','MAR','MIE','JUE','VIE','SAB','DOM'].forEach(function(d,i){
+    var h = document.createElement('div');
+    h.className = 'mcp-th mcp-th-day';
+    if(i===todayIdx) h.className += ' today';
+    if(i>=5) h.className += ' we';
+    h.textContent = d;
+    h.title = 'Clic para copiar este dia a otro';
+    h.onclick = function(){ mcpOpenCopyDay(i); };
+    frag.appendChild(h);
+  });
+  return frag;
+}
+
+function mcpBuildCell(dom, di, grid){
+  var cellData = grid.days[di][dom.id] || {st:0};
+  var stIco = ['\u2715','!','\u2713'][cellData.st];
+  var stCls = ['no','care','ok'][cellData.st];
+  var cell = document.createElement('div');
+  cell.className = 'mcp-cell '+stCls;
+  cell.dataset.dayidx = di;
+  cell.dataset.domid = dom.id;
+  var html = '';
+  if(cellData.rpe!==undefined && cellData.rpe!==null && cellData.rpe!=='') html += '<div class="mcp-crpe">R'+cellData.rpe+'</div>';
+  if(cellData.eva!==undefined && cellData.eva!==null && cellData.eva!=='') html += '<div class="mcp-ceva">E'+cellData.eva+'</div>';
+  html += '<div class="mcp-cs">'+stIco+'</div>';
+  if(cellData.det) html += '<div class="mcp-cdet">'+cellData.det+'</div>';
+  cell.innerHTML = html;
+  cell.onclick = function(){ mcpOpenCellModal(dom.id, di); };
+  return cell;
+}
+
+function mcpUpdateCellDom(domId, di){
+  // Update only one cell without re-rendering the entire panel (FIX BUG)
+  if(!mcpCurrent) return;
+  var grid = mcgGetGrid(mcpCurrent.jKey, mcpCurrent.mcNum);
+  var dom = MCG_DOMAINS.find(function(d){return d.id===domId;});
+  var newCell = mcpBuildCell(dom, di, grid);
+  // Find and replace the old cell
+  var oldCell = document.querySelector('.mcp-cell[data-dayidx="'+di+'"][data-domid="'+domId+'"]');
+  if(oldCell && oldCell.parentNode){
+    oldCell.parentNode.replaceChild(newCell, oldCell);
+  }
+}
+
+function mcpUpdateObjectivesDisplay(){
+  // Recalc and update only the objectives section
+  if(!mcpCurrent) return;
+  var grid = mcgGetGrid(mcpCurrent.jKey, mcpCurrent.mcNum);
+  var rpeVals=[], evaVals=[];
+  for(var d=0;d<7;d++){
+    MCG_DOMAINS.forEach(function(dom){
+      var c = grid.days[d][dom.id];
+      if(c && c.st>0){
+        if(c.rpe!==undefined && c.rpe!==null && c.rpe!=='') rpeVals.push(parseFloat(c.rpe));
+        if(c.eva!==undefined && c.eva!==null && c.eva!=='') evaVals.push(parseFloat(c.eva));
+      }
+    });
+  }
+  var rpeAvg = rpeVals.length ? (rpeVals.reduce(function(a,b){return a+b;},0)/rpeVals.length).toFixed(1) : '-';
+  var evaAvg = evaVals.length ? (evaVals.reduce(function(a,b){return a+b;},0)/evaVals.length).toFixed(1) : '-';
+  var evaMax = evaVals.length ? Math.max.apply(null, evaVals) : 0;
+  document.querySelectorAll('.mcp-obj-real').forEach(function(el,i){
+    if(i===0) el.innerHTML = 'real <strong>'+rpeAvg+'</strong>';
+    else el.innerHTML = 'pico <strong>'+evaMax+'</strong>';
+  });
+}
+
+function mcpCloseCheck(){
+  if(mcpDirty && !confirm('Tenes cambios sin guardar. Cerrar igual?')) return;
+  mcpClose();
+}
+
+function mcpNav(dir){
+  if(mcpDirty && !confirm('Tenes cambios sin guardar. Cambiar de MC igual?')) return;
+  mcpCurrent.mcNum = Math.max(1, mcpCurrent.mcNum + dir);
+  mcgViewing[mcpCurrent.jKey] = mcpCurrent.mcNum;
+  mcpDirty = false;
+  mcpRenderPanel();
+}
+
+function mcpApplyTemplate(){
+  if(!mcpCurrent) return;
+  var fase = (rehabMap[mcpCurrent.jKey] && rehabMap[mcpCurrent.jKey].fase) || 0;
+  if(!confirm('Aplicar plantilla F'+fase+' al MC '+mcpCurrent.mcNum+'?\n\nEsto reemplaza los valores actuales pero NO se guarda hasta que toques "Guardar MC".')) return;
+  mcgApplyTemplate(mcpCurrent.jKey, mcpCurrent.mcNum, fase);
+  mcpDirty = true;
+  mcpRenderPanel();
+  toast('Plantilla F'+fase+' aplicada');
+}
+
+async function mcpSave(){
+  if(!mcpCurrent) return;
+  try{
+    await mcgSaveToSupabase(mcpCurrent.jKey, mcpCurrent.mcNum);
+    mcpDirty = false;
+    toast('MC '+mcpCurrent.mcNum+' guardado');
+  }catch(e){
+    console.error(e);
+    alert('Error al guardar: '+(e.message||'verificar conexion'));
+  }
+}
+
+// ═══ MODAL SIMPLIFICADO ═══════════════════════════════════
+var mcm2Ctx = null;
+
+function mcpOpenCellModal(domId, dayIdx){
+  if(!mcpCurrent) return;
+  var grid = mcgGetGrid(mcpCurrent.jKey, mcpCurrent.mcNum);
+  var cellData = grid.days[dayIdx][domId] || {st:0};
+  var dom = MCG_DOMAINS.find(function(d){return d.id===domId;});
+  mcm2Ctx = {
+    domId: domId,
+    dayIdx: dayIdx,
+    data: JSON.parse(JSON.stringify(cellData))
+  };
+
+  var modal = qs('mcm2-modal');
+  if(!modal){
+    modal = document.createElement('div');
+    modal.id = 'mcm2-modal';
+    modal.className = 'mcm2-bg';
+    modal.innerHTML = '<div class="mcm2" id="mcm2-inner"></div>';
+    document.body.appendChild(modal);
+    modal.addEventListener('click', function(e){
+      if(e.target===modal) mcm2Close();
+    });
+  }
+
+  var rng = mcgMCRange(mcpCurrent.mcNum);
+  var startD = new Date(rng.start+'T12:00:00');
+  var thisD = new Date(startD.getTime()+dayIdx*86400000);
+  var dateStr = thisD.toLocaleDateString('es-AR',{day:'2-digit',month:'short',weekday:'long'});
+
+  var quick = mcm2GetQuickField(domId);
+  var extras = mcm2GetExtraFields(domId);
+
+  var st = cellData.st || 0;
+  var html = ''
+    + '<div class="mcm2-head">'
+    +   '<div>'
+    +     '<div class="mcm2-title">'+dom.ico+' '+dom.lbl+'</div>'
+    +     '<div class="mcm2-sub">'+dateStr+' · MC '+mcpCurrent.mcNum+'</div>'
+    +   '</div>'
+    +   '<button class="mcm2-close" onclick="mcm2Close()">&#x2715;</button>'
+    + '</div>'
+    + '<div class="mcm2-body">'
+    +   '<div class="mcm2-sec">'
+    +     '<div class="mcm2-cycle">'
+    +       '<div class="mcm2-co no'+(st===0?' on':'')+'" data-st="0">&#x2715; No</div>'
+    +       '<div class="mcm2-co care'+(st===1?' on':'')+'" data-st="1">! Limitado</div>'
+    +       '<div class="mcm2-co ok'+(st===2?' on':'')+'" data-st="2">&#x2713; Si</div>'
+    +     '</div>'
+    +   '</div>'
+    +   '<div class="mcm2-quick">';
+
+  // Quick field for this domain
+  if(quick){
+    var qVal = cellData[quick.key] || '';
+    html += '<div class="mcm2-quick-item">'
+      + '<div class="mcm2-quick-lbl">'+quick.lbl+'</div>'
+      + '<input type="number" class="mcm2-num" data-qkey="'+quick.key+'" value="'+qVal+'" placeholder="'+(quick.placeholder||'-')+'">'
+      + '</div>';
+  }
+
+  // Always show RPE and EVA
+  html += '<div class="mcm2-quick-item">'
+    + '<div class="mcm2-quick-lbl">RPE sesion</div>'
+    + '<input type="number" class="mcm2-num" id="mcm2-rpe" min="0" max="10" value="'+(cellData.rpe||'')+'" placeholder="0-10">'
+    + '</div>'
+    + '<div class="mcm2-quick-item" style="grid-column:span '+(quick?'2':'2')+'">'
+    + '<div class="mcm2-quick-lbl">EVA dolor</div>'
+    + '<input type="number" class="mcm2-num" id="mcm2-eva" min="0" max="10" value="'+(cellData.eva||'')+'" placeholder="0-10">'
+    + '</div>'
+    + '</div>';
+
+  // Extra fields toggle
+  if(extras.length>0){
+    html += '<button class="mcm2-toggle" onclick="mcm2ToggleExtra()">'
+      + '<span>+ Mas detalles ('+extras.length+' campos)</span>'
+      + '<span id="mcm2-toggle-arrow">▼</span>'
+      + '</button>'
+      + '<div class="mcm2-extra" id="mcm2-extra">';
+    extras.forEach(function(f){
+      var curVal = cellData[f.key];
+      if(f.type==='chips'){
+        var sel = curVal || (f.multi?[]:null);
+        var chips = f.opts.map(function(o){
+          var on = f.multi ? (sel.indexOf(o)>=0) : (sel===o);
+          return '<div class="mcm2-chip'+(on?' on':'')+'" data-val="'+o+'">'+o+'</div>';
+        }).join('');
+        html += '<div class="mcm2-sec">'
+          + '<div class="mcm2-lbl">'+f.lbl+'</div>'
+          + '<div class="mcm2-chips" data-ekey="'+f.key+'" data-multi="'+(f.multi?'1':'0')+'">'+chips+'</div>'
+          + '</div>';
+      }else if(f.type==='text'){
+        html += '<div class="mcm2-sec">'
+          + '<div class="mcm2-lbl">'+f.lbl+'</div>'
+          + '<input type="text" class="mcm2-input" data-ekey="'+f.key+'" value="'+(curVal||'')+'" placeholder="'+(f.placeholder||'')+'">'
+          + '</div>';
+      }
+    });
+    // Notes always extra
+    html += '<div class="mcm2-sec">'
+      + '<div class="mcm2-lbl">Notas adicionales</div>'
+      + '<textarea class="mcm2-input" id="mcm2-notes" rows="2" placeholder="Notas opcionales...">'+(cellData.notas||'')+'</textarea>'
+      + '</div>';
+    html += '</div>';
+  }else{
+    // Just notes
+    html += '<div class="mcm2-sec">'
+      + '<div class="mcm2-lbl">Notas adicionales</div>'
+      + '<textarea class="mcm2-input" id="mcm2-notes" rows="2" placeholder="Notas opcionales...">'+(cellData.notas||'')+'</textarea>'
+      + '</div>';
+  }
+
+  // Duplicate buttons
+  html += '<div class="mcm2-dup">'
+    + '<div class="mcm2-dup-title">⎘ Duplicar esta configuracion</div>'
+    + '<div class="mcm2-dup-btns">'
+    + '<button class="mcm2-dup-btn" onclick="mcm2Dup(\'lv\')">A lun-vie</button>'
+    + '<button class="mcm2-dup-btn" onclick="mcm2Dup(\'week\')">A toda la semana</button>'
+    + '<button class="mcm2-dup-btn" onclick="mcm2Dup(\'mw\')">A miercoles + viernes</button>'
+    + '<button class="mcm2-dup-btn" onclick="mcm2Dup(\'tj\')">A martes + jueves</button>'
+    + '</div>'
+    + '</div>';
+
+  html += '</div>'
+    + '<div class="mcm2-foot">'
+    +   '<button class="mcm2-can" onclick="mcm2Close()">Cancelar</button>'
+    +   '<button class="mcm2-save" onclick="mcm2Apply()">Aplicar</button>'
+    + '</div>';
+
+  var inner = qs('mcm2-inner');
+  inner.innerHTML = html;
+
+  // Wire interactions
+  inner.addEventListener('click', mcm2InnerClick);
+  modal.classList.add('on');
+}
+
+function mcm2InnerClick(e){
+  var st = e.target.closest('.mcm2-co');
+  if(st){
+    document.querySelectorAll('.mcm2-co').forEach(function(o){o.classList.remove('on');});
+    st.classList.add('on');
+    return;
+  }
+  var chip = e.target.closest('.mcm2-chip');
+  if(chip){
+    var box = chip.parentElement;
+    var multi = box.dataset.multi==='1';
+    if(multi){
+      chip.classList.toggle('on');
+    }else{
+      box.querySelectorAll('.mcm2-chip').forEach(function(c){c.classList.remove('on');});
+      chip.classList.add('on');
+    }
+  }
+}
+
+function mcm2ToggleExtra(){
+  var ex = qs('mcm2-extra');
+  var arrow = qs('mcm2-toggle-arrow');
+  if(ex){
+    ex.classList.toggle('on');
+    if(arrow) arrow.textContent = ex.classList.contains('on') ? '▲' : '▼';
+  }
+}
+
+function mcm2Close(){
+  var m = qs('mcm2-modal');
+  if(m) m.classList.remove('on');
+  mcm2Ctx = null;
+}
+
+function mcm2CollectCellData(){
+  // Builds the new cellData from the modal's current state
+  var cell = {};
+  var stEl = document.querySelector('.mcm2-co.on');
+  cell.st = stEl ? parseInt(stEl.dataset.st) : 0;
+
+  var quick = mcm2GetQuickField(mcm2Ctx.domId);
+  if(quick){
+    var qInput = document.querySelector('[data-qkey="'+quick.key+'"]');
+    if(qInput && qInput.value!=='') cell[quick.key] = parseInt(qInput.value);
+  }
+
+  mcm2GetExtraFields(mcm2Ctx.domId).forEach(function(f){
+    if(f.type==='chips'){
+      var box = document.querySelector('[data-ekey="'+f.key+'"].mcm2-chips');
+      if(box){
+        var multi = box.dataset.multi==='1';
+        var on = Array.from(box.querySelectorAll('.mcm2-chip.on')).map(function(c){return c.dataset.val;});
+        if(on.length) cell[f.key] = multi ? on : on[0];
+      }
+    }else if(f.type==='text'){
+      var inp = document.querySelector('[data-ekey="'+f.key+'"]');
+      if(inp && inp.value.trim()) cell[f.key] = inp.value.trim();
+    }
+  });
+
+  var rpe = qs('mcm2-rpe').value;
+  var eva = qs('mcm2-eva').value;
+  if(rpe!=='') cell.rpe = parseInt(rpe);
+  if(eva!=='') cell.eva = parseInt(eva);
+  var notes = qs('mcm2-notes');
+  if(notes && notes.value.trim()) cell.notas = notes.value.trim();
+
+  cell.det = mcgBuildDetail(mcm2Ctx.domId, cell);
+  return cell;
+}
+
+function mcm2Apply(){
+  if(!mcm2Ctx || !mcpCurrent) return;
+  var cell = mcm2CollectCellData();
+  var grid = mcgGetGrid(mcpCurrent.jKey, mcpCurrent.mcNum);
+  grid.days[mcm2Ctx.dayIdx][mcm2Ctx.domId] = cell;
+  mcpDirty = true;
+  // FIX BUG: update only the cell, not re-render the whole panel
+  mcpUpdateCellDom(mcm2Ctx.domId, mcm2Ctx.dayIdx);
+  mcpUpdateObjectivesDisplay();
+  mcm2Close();
+}
+
+function mcm2Dup(scope){
+  if(!mcm2Ctx || !mcpCurrent) return;
+  var cell = mcm2CollectCellData();
+  var grid = mcgGetGrid(mcpCurrent.jKey, mcpCurrent.mcNum);
+  var srcDay = mcm2Ctx.dayIdx;
+  var targets = [];
+  if(scope==='lv') targets = [0,1,2,3,4];
+  else if(scope==='week') targets = [0,1,2,3,4,5,6];
+  else if(scope==='mw') targets = [2,4];
+  else if(scope==='tj') targets = [1,3];
+
+  targets.forEach(function(di){
+    grid.days[di][mcm2Ctx.domId] = JSON.parse(JSON.stringify(cell));
+  });
+  mcpDirty = true;
+  mcm2Close();
+  // Re-render only affected cells
+  targets.forEach(function(di){ mcpUpdateCellDom(mcm2Ctx.domId, di); });
+  mcpUpdateObjectivesDisplay();
+  toast('Duplicado a '+targets.length+' dias');
+}
+
+// Quick field for each domain (the most important one)
+function mcm2GetQuickField(domId){
+  var quick = {
+    gim:{key:'rm', lbl:'% RM', placeholder:'70'},
+    aer:{key:'min', lbl:'Duracion (min)', placeholder:'30'},
+    int:{key:'vol', lbl:'Volumen (min)', placeholder:'16'},
+    spr:{key:'pct', lbl:'% Vmax', placeholder:'80'},
+    cod:{key:'pct', lbl:'% Velocidad', placeholder:'75'},
+    tec:{key:'min', lbl:'Duracion (min)', placeholder:'20'},
+    tac:{key:'min', lbl:'Duracion (min)', placeholder:'15'},
+    pli:{key:'vol', lbl:'Saltos totales', placeholder:'30'},
+    con:null
+  };
+  return quick[domId] || null;
+}
+
+// Extra fields (in the collapsible section)
+function mcm2GetExtraFields(domId){
+  var fields = {
+    gim:[
+      {type:'chips', key:'grupos', lbl:'Grupos musculares', opts:['Tren sup','Core','Tren inf','Completo'], multi:true},
+      {type:'chips', key:'tipo', lbl:'Tipo de contraccion', opts:['Concentrico','Excentrico','Isometrico']}
+    ],
+    aer:[
+      {type:'chips', key:'zona', lbl:'Zona FC', opts:['Z1','Z2','Z3']},
+      {type:'chips', key:'sup', lbl:'Superficie', opts:['Bici','Cinta','Campo','Eliptica']}
+    ],
+    int:[
+      {type:'chips', key:'tipo', lbl:'Tipo', opts:['HIIT','RSA','Box2box','COD interm']},
+      {type:'text', key:'intensidad', lbl:'% Intensidad (texto libre)', placeholder:'ej: 75%'}
+    ],
+    spr:[
+      {type:'text', key:'dist', lbl:'Distancia (m)', placeholder:'30'},
+      {type:'text', key:'reps', lbl:'Repeticiones', placeholder:'8'}
+    ],
+    cod:[
+      {type:'chips', key:'ang', lbl:'Angulo', opts:['<45°','45-90°','>90°']},
+      {type:'chips', key:'tipo', lbl:'Tipo', opts:['Planeados','Reactivos']}
+    ],
+    tec:[
+      {type:'chips', key:'mod', lbl:'Modalidad', opts:['Individual','Pareja','Grupal']},
+      {type:'chips', key:'tipo', lbl:'Tipo', opts:['Conduccion','Pase','Definicion','Mixto']}
+    ],
+    tac:[
+      {type:'chips', key:'fmt', lbl:'Formato', opts:['Reducido','Posicional','Futbol completo']},
+      {type:'chips', key:'cont', lbl:'Contacto', opts:['Sin','Controlado','Libre']}
+    ],
+    pli:[
+      {type:'chips', key:'tipo', lbl:'Tipo', opts:['Vertical','Horizontal','Lateral']},
+      {type:'chips', key:'lat', lbl:'Lateralidad', opts:['Unilateral','Bilateral']}
+    ],
+    con:[
+      {type:'chips', key:'nivel', lbl:'Nivel', opts:['Prohibido','Controlado','Libre']},
+      {type:'chips', key:'ctx', lbl:'Contexto', opts:['Reducido','Posicional','Disputa']}
+    ]
+  };
+  return fields[domId] || [];
+}
+
+// ═══ COPIA DE DIA A DIA ═══════════════════════════════════
+function mcpOpenCopyDay(srcDayIdx){
+  if(!mcpCurrent) return;
+  var modal = qs('mcd-modal');
+  if(!modal){
+    modal = document.createElement('div');
+    modal.id = 'mcd-modal';
+    modal.className = 'mcd-bg';
+    modal.innerHTML = '<div class="mcd" id="mcd-inner"></div>';
+    document.body.appendChild(modal);
+    modal.addEventListener('click', function(e){
+      if(e.target===modal) mcdClose();
+    });
+  }
+  var days = ['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'];
+  var srcSel = '';
+  for(var i=0;i<7;i++){
+    srcSel += '<option value="'+i+'"'+(srcDayIdx===i?' selected':'')+'>'+days[i]+'</option>';
+  }
+  var dstSel = '';
+  for(var i=0;i<7;i++){
+    dstSel += '<option value="'+i+'">'+days[i]+'</option>';
+  }
+  qs('mcd-inner').innerHTML = ''
+    + '<div class="mcd-title">Copiar dia completo</div>'
+    + '<div class="mcd-row"><span style="font-size:11px;color:var(--txt2);min-width:50px">Origen:</span><select id="mcd-src">'+srcSel+'</select></div>'
+    + '<div class="mcd-row"><span style="font-size:11px;color:var(--txt2);min-width:50px">Destino:</span><select id="mcd-dst">'+dstSel+'</select></div>'
+    + '<div style="font-size:10.5px;color:var(--txt3);margin-top:6px">Copia los 9 dominios del dia origen al destino. Esto sobreescribe lo que tenga el destino.</div>'
+    + '<div class="mcd-foot">'
+    + '<button class="mcm2-can" onclick="mcdClose()">Cancelar</button>'
+    + '<button class="mcm2-save" onclick="mcdApply()">Copiar</button>'
+    + '</div>';
+  modal.classList.add('on');
+}
+
+function mcdClose(){
+  var m = qs('mcd-modal');
+  if(m) m.classList.remove('on');
+}
+
+function mcdApply(){
+  if(!mcpCurrent) return;
+  var src = parseInt(qs('mcd-src').value);
+  var dst = parseInt(qs('mcd-dst').value);
+  if(src===dst){ mcdClose(); return; }
+  var grid = mcgGetGrid(mcpCurrent.jKey, mcpCurrent.mcNum);
+  grid.days[dst] = JSON.parse(JSON.stringify(grid.days[src]));
+  mcpDirty = true;
+  mcdClose();
+  // Re-render affected cells
+  MCG_DOMAINS.forEach(function(dom){
+    mcpUpdateCellDom(dom.id, dst);
+  });
+  mcpUpdateObjectivesDisplay();
+  var days = ['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'];
+  toast('Copiado de '+days[src]+' a '+days[dst]);
+}
+
+
 function renderRehab(){
   var catF=qs('rh-cat').value;
   var activos=allData.filter(function(d){return d.activo;});
@@ -1565,12 +2328,15 @@ function renderRehab(){
       upd.textContent='Actualizado: hoy';toast('Nota guardada');
     });
 
-    // NEW: MC weekly grid container
-    var mcgWrap=document.createElement('div');
-    mcgWrap.className='mcg-wrap';
-    body.appendChild(mcgWrap);
-    // Render grid asynchronously after appending
-    setTimeout(function(){ mcgRenderGrid(k, mcgWrap); }, 0);
+    // NEW V2: Button to open fullscreen panel
+    var openBtn=document.createElement('button');
+    openBtn.className='mcp-open-btn';
+    openBtn.innerHTML='<span class="mcp-open-btn-icon">⊞</span> Abrir planificacion semanal';
+    openBtn.addEventListener('click',function(e){
+      e.stopPropagation();
+      mcpOpen(k, d.nombre);
+    });
+    body.appendChild(openBtn);
     card.appendChild(head);card.appendChild(body);
     grid.appendChild(card);
   });
