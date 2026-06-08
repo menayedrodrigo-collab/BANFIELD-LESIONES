@@ -729,6 +729,10 @@ function ppBuildDetailLong(domId, c){
     if(c.nivel) parts.push('<strong>'+c.nivel+'</strong>');
     if(c.ctx) parts.push('en '+c.ctx.toLowerCase());
   }
+  // Fallback: si no hay campos especificos pero hay un resumen de plantilla, mostrarlo
+  if(parts.length===0 && c.det){
+    return '<strong>'+c.det+'</strong>';
+  }
   return parts.join(' · ');
 }
 
