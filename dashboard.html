@@ -602,6 +602,22 @@ tbody td{padding:8px 12px;vertical-align:middle}
     </div>
     <div class="card"><div class="ctitle">Ranking por zona</div><div id="stat-list"></div></div>
   </div>
+  <div class="g3c" style="display:grid;grid-template-columns:2fr 1fr;gap:13px;margin-top:13px">
+    <div class="card">
+      <div class="ctitle-row">
+        <div class="ctitle">Lesiones por mes</div>
+        <span style="font-size:10px;color:var(--txt3);letter-spacing:.5px">Ultimos 12 meses</span>
+      </div>
+      <div class="cwsm"><canvas id="ch-mes"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="ctitle-row">
+        <div class="ctitle">Injury burden por categoria</div>
+        <span style="font-size:10px;color:var(--txt3);letter-spacing:.5px" title="Dias perdidos x 1000 / horas exposicion">dias/1000hs</span>
+      </div>
+      <div class="cwsm"><canvas id="ch-burden"></canvas></div>
+    </div>
+  </div>
   <div class="tw">
     <div class="ttb">
       <div class="ctitle" style="margin:0;font-size:11px">Registro de lesiones</div>
@@ -1017,6 +1033,75 @@ function renderCharts(data){
     onClick:function(evt,els){if(els.length)setCF('mecanismo',me[els[0].index][0]);},
     scales:{x:Object.assign({},SCX,{beginAtZero:true}),y:Object.assign({},SCX,{grid:{color:'transparent'}})},
     plugins:{legend:{display:false},tooltip:Object.assign({},TT,{callbacks:{label:function(i){return ' '+i.raw+' - clic';}}})}
+  });
+
+  // ═══ Lesiones por mes (line chart, últimos 12 meses) ═══
+  var monthLabels = [];
+  var monthCounts = [];
+  var today = new Date();
+  var monthNames = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  for(var i=11; i>=0; i--){
+    var d = new Date(today.getFullYear(), today.getMonth()-i, 1);
+    var key = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0');
+    monthLabels.push(monthNames[d.getMonth()] + (d.getMonth()===0 ? ' ' + (d.getFullYear()%100) : ''));
+    var count = data.filter(function(x){
+      if(!x.fecha) return false;
+      return x.fecha.slice(0,7) === key;
+    }).length;
+    monthCounts.push(count);
+  }
+  mkC('ch-mes','line', monthLabels, monthCounts, ['rgba(62,160,62,.8)'], {
+    elements:{
+      line:{tension:0.35, borderColor:'rgba(62,160,62,.85)', borderWidth:2, backgroundColor:'rgba(62,160,62,.12)', fill:true},
+      point:{radius:4, hoverRadius:6, backgroundColor:'rgba(62,160,62,1)', borderColor:'#0D130D', borderWidth:2}
+    },
+    scales:{
+      x: Object.assign({},SCX,{grid:{color:'transparent'}, ticks:{color:'#5A785A',font:{size:10}}}),
+      y: Object.assign({},SCX,{beginAtZero:true, ticks:{stepSize:1,precision:0,color:'#5A785A',font:{size:10}}, grid:{color:'rgba(28,42,28,.5)'}})
+    },
+    plugins:{
+      legend:{display:false},
+      tooltip:Object.assign({},TT,{callbacks:{label:function(i){return ' '+i.raw+' lesion'+(i.raw===1?'':'es');}}})
+    }
+  });
+
+  // ═══ Injury burden por categoría ═══
+  // burden = (dias perdidos × 1000) / horas exposicion
+  // horas/jugador/semana = 11.5 (5 entren × 2h + 1 partido × 1.5h)
+  // jugadores/categoria = 25 (default)
+  // semanas elapsed = (hoy - seasonStart) / 7
+  var PLAYERS_PER_CAT = 25;
+  var HRS_PER_WEEK = 11.5;
+  var ss = seasonStart ? new Date(seasonStart+'T12:00:00') : new Date(today.getFullYear(),0,5);
+  var weeksElapsed = Math.max(1, Math.floor((today - ss)/(7*86400000)));
+  var hoursPerPlayer = weeksElapsed * HRS_PER_WEEK;
+  var totalHoursPerCat = PLAYERS_PER_CAT * hoursPerPlayer;
+
+  var burdenByCat = {};
+  data.forEach(function(x){
+    if(!x.categoria || !x.dias) return;
+    if(!burdenByCat[x.categoria]) burdenByCat[x.categoria]=0;
+    burdenByCat[x.categoria] += x.dias;
+  });
+  var burdenData = catOrd.filter(function(c){return burdenByCat[c];}).map(function(c){
+    var burden = (burdenByCat[c] * 1000) / totalHoursPerCat;
+    return [c, parseFloat(burden.toFixed(1))];
+  });
+  if(sortSt.cat!=='natural') burdenData.sort(function(a,b){return b[1]-a[1];});
+  var bColors = burdenData.map(function(_,i){return CC[i%CC.length];});
+  mkC('ch-burden','bar', burdenData.map(function(e){return e[0];}), burdenData.map(function(e){return e[1];}), bColors, {
+    indexAxis:'y',
+    scales:{
+      x: Object.assign({},SCX,{beginAtZero:true, ticks:{color:'#5A785A',font:{size:10}}, grid:{color:'rgba(28,42,28,.5)'}}),
+      y: Object.assign({},SCX,{grid:{color:'transparent'}, ticks:{color:'#5A785A',font:{size:10}}})
+    },
+    plugins:{
+      legend:{display:false},
+      tooltip:Object.assign({},TT,{callbacks:{label:function(i){
+        var dpc = burdenByCat[burdenData[i.dataIndex][0]] || 0;
+        return ' burden '+i.raw+' (dias '+dpc+', ~'+totalHoursPerCat.toFixed(0)+'hs exposicion)';
+      }}})
+    }
   });
 
   var ar=srt(Object.entries(cBy(data,'region')),'region').slice(0,10);
